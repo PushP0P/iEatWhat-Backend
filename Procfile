@@ -1,1 +1,1 @@
-web: build/install/gradle-getting-started/bin/gradle-getting-started
+web: build/install/i-eat-what-backend/bin/i-eat-what-backend
