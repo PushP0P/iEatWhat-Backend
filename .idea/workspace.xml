@@ -2,76 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a83be6b-7353-40a6-afd8-d8c92ba4a0e6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4.1/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.4.1/fileHashes/fileHashes.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4.1/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.4.1/fileHashes/fileHashes.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4.1/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4.1/taskHistory/taskHistory.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4.1/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4.1/taskHistory/taskHistory.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/windows-dev-start.sh" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Main.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/app/.ratpack" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/app/Main.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/app/public/lang-logo.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/app/public/stylesheets/main.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/app/templates/db.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/app/templates/error.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/app/templates/header.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/app/templates/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/app/templates/nav.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/bin/gradle-getting-started" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/bin/gradle-getting-started.bat" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/HikariCP-2.6.2.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/aopalliance-1.0.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/caffeine-2.4.0.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/groovy-all-2.4.12.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/guava-21.0.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/guice-4.1.0.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/guice-multibindings-4.1.0.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/jackson-annotations-2.8.0.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/jackson-core-2.8.9.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/jackson-databind-2.8.9.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/jackson-dataformat-yaml-2.8.9.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/jackson-datatype-guava-2.8.9.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/jackson-datatype-jdk8-2.8.9.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/jackson-datatype-jsr310-2.8.9.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/javassist-3.19.0-GA.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/javax.inject-1.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/netty-buffer-4.1.17.Final.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/netty-codec-4.1.17.Final.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/netty-codec-http-4.1.17.Final.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/netty-common-4.1.17.Final.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/netty-handler-4.1.17.Final.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/netty-resolver-4.1.17.Final.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/netty-transport-4.1.17.Final.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/netty-transport-native-epoll-4.1.17.Final-linux-x86_64.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/netty-transport-native-unix-common-4.1.17.Final.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/postgresql-42.2.0.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/ratpack-base-1.5.1.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/ratpack-core-1.5.1.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/ratpack-exec-1.5.1.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/ratpack-groovy-1.5.1.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/ratpack-guice-1.5.1.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/ratpack-hikari-1.5.1.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/reactive-streams-1.0.0.final.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/slf4j-api-1.7.25.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/slf4j-simple-1.7.25.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/install/gradle-getting-started/lib/snakeyaml-1.17.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/libs/gradle-getting-started.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/.ratpack" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/public/lang-logo.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/public/stylesheets/main.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/db.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/error.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/header.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/nav.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/scripts/gradle-getting-started" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/scripts/gradle-getting-started.bat" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/i-eat-backend/com/push/iEat/iEatBackend$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/i-eat-backend/com/push/iEat/iEatBackend$RequestHandler.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/i-eat-backend/com/push/iEat/iEatBackend.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/dev-start.sh" afterPath="$PROJECT_DIR$/mac-dev-start.sh" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -100,16 +33,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="iEatBackend.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/push/iEatBackend/iEatBackend.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -124,11 +47,61 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
               <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="db.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ratpack/templates/db.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="error.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ratpack/templates/error.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ratpack/templates/header.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="50" lean-forward="false" selection-start-line="3" selection-start-column="50" selection-end-line="3" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="windows-dev-start.sh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/windows-dev-start.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="2" lean-forward="false" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ratpack/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -569,6 +542,7 @@
         <option value="$PROJECT_DIR$/dev-start.sh" />
         <option value="$PROJECT_DIR$/src/ratpack/templates/index.html" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/windows-dev-start.sh" />
       </list>
     </option>
   </component>
@@ -741,6 +715,52 @@
               <item name="gradle-getting-started" type="b2602c69:ProjectViewProjectNode" />
               <item name="gradle-getting-started" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
+            <path>
+              <item name="gradle-getting-started" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gradle-getting-started" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gradle-getting-started" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gradle-getting-started" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gradle-getting-started" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gradle-getting-started" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gradle-getting-started" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gradle-getting-started" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ratpack" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gradle-getting-started" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gradle-getting-started" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ratpack" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gradle-getting-started" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gradle-getting-started" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ratpack" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="stylesheets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gradle-getting-started" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gradle-getting-started" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ratpack" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -894,10 +914,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4177000" />
+    <option name="totallyTimeSpent" value="4488000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -908,7 +929,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1015,7 +1036,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev-start.sh">
+    <entry file="file://$PROJECT_DIR$/mac-dev-start.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1074,26 +1095,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ratpack/templates/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="50" lean-forward="false" selection-start-line="3" selection-start-column="50" selection-end-line="3" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev-start.sh">
+    <entry file="file://$PROJECT_DIR$/mac-dev-start.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="15" lean-forward="false" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ratpack/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1138,6 +1143,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ratpack/templates/db.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ratpack/templates/nav.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ratpack/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ratpack/templates/error.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ratpack/templates/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="50" lean-forward="false" selection-start-line="3" selection-start-column="50" selection-end-line="3" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/windows-dev-start.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="2" lean-forward="false" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
           <folding />
         </state>
       </provider>
