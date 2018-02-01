@@ -2,7 +2,7 @@
 
 [iEatWhat Website](https://ieatwhat.herokuapp.com)
 ## Description
-The backend services for iEatWhat.
+A mobile first, web application that solves the problem for those that need to find specialized food products sold by retailers and establishments. 
 
 ## The PushP0P team
 * [Daniel Hodgson](https://github.com/hodgsond)
