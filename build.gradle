@@ -1,8 +1,6 @@
 plugins {
     id "io.ratpack.ratpack-groovy" version "1.5.1"
 }
-apply plugin : 'java'
-apply plugin : 'application'
 
 allprojects {
     repositories {
@@ -10,14 +8,10 @@ allprojects {
     }
 }
 
-subprojects {
-    version = 1
-}
-
 mainClassName = "Main"
 
 dependencies {
-    compile project(':models')
+    compile project(':src:api')
     runtime "org.slf4j:slf4j-simple:1.7.25"
     compile ratpack.dependency("hikari")
     compile "org.postgresql:postgresql:42.2.0"
@@ -26,12 +20,4 @@ dependencies {
 
 task stage {
     dependsOn installDist
-}
-
-subprojects {
-    task hello {
-        doLast { task ->
-            println "I'm $task.project.name"
-        }
-    }
 }
