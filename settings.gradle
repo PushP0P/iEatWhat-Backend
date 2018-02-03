@@ -1,1 +1,2 @@
 rootProject.name = "i-eat-what-backend"
+include 'models'
