@@ -20,9 +20,9 @@ public class Server {
                     headers.set("Access-Control-Allow-Origin", "*");
                     headers.set("Access-Control-Allow-Headers", "x-requested-with, origin, content-type, accept");
                     handler.getValue().handle(ctx);
+
                 });
             }
         }));
     }
 }
-
