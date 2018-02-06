@@ -1,5 +1,6 @@
 plugins {
     id "io.ratpack.ratpack-groovy" version "1.5.1"
+    id 'org.ajoberstar.grgit' version "2.0.1"
 }
 
 allprojects {
@@ -11,12 +12,30 @@ allprojects {
 mainClassName = "Main"
 
 dependencies {
-    compile project(':src:api')
     runtime "org.slf4j:slf4j-simple:1.7.25"
     compile "io.reactivex.rxjava2:rxjava:2.1.9"
     compile ratpack.dependency("hikari")
     compile "org.postgresql:postgresql:42.2.0"
     testCompile 'junit:junit:4.12'
+    compile project(':src:api')
+    compile project(':src:client')
+
+}
+
+task cloneClient {
+    doLast {
+        org.ajoberstar.grgit.Grgit.clone(
+                dir : './src/client',
+                uri : 'git@github.com:PushP0P/iEatWhat-Client.git'
+        )
+    }
+}
+
+task copyClientBuildToRatPackPublic(type: Copy) {
+    from './src/client/build'
+    into './src/ratpack/public'
+    from './src/ratpack/public/index.html'
+    into './src/ratpack/templates/index.html'
 }
 
 task stage {

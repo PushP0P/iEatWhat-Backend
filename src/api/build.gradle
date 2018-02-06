@@ -1,6 +1,9 @@
-apply plugin : 'java'
+apply plugin : 'io.ratpack.ratpack-groovy'
+
 
 dependencies {
+    runtime "org.slf4j:slf4j-simple:1.7.25"
     compile project(':src:models')
+    compile ratpack.dependency('pac4j')
     compile ratpack.dependency("hikari")
 }
