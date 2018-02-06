@@ -1,2 +1,2 @@
 rootProject.name = "i-eat-what-backend"
-include 'src:models', 'src:api', 'src:client', 'src:ratpack'
+include 'src:models', 'src:api'

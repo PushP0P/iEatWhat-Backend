@@ -1,6 +1,5 @@
 plugins {
     id "io.ratpack.ratpack-groovy" version "1.5.1"
-    id 'org.ajoberstar.grgit' version "2.0.1"
 }
 
 allprojects {
@@ -18,8 +17,6 @@ dependencies {
     compile "org.postgresql:postgresql:42.2.0"
     testCompile 'junit:junit:4.12'
     compile project(':src:api')
-    compile project(':src:client')
-
 }
 
 task stage {
