@@ -1,0 +1,70 @@
+plugins{
+    id "com.moowork.node" version "1.2.0"
+    id 'org.ajoberstar.grgit' version '2.0.1'
+
+}
+apply plugin: "java"
+
+buildDir = new File("client-build")
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'iEatBuild'
+        }
+    }
+}
+
+node {
+    workDir = file("${project.buildDir}/repo")
+}
+
+task cleanNode(type: Delete) {
+    group 'React Client'
+    description 'Removes files used to build the bundle'
+    println 'cleanNode called'
+    delete 'build'
+    delete 'node_modules'
+
+}
+
+task cloneClient() {
+    group 'React Client'
+    description 'Clones the client repo'
+    println 'cloneClient called'
+    doLast{
+        org.ajoberstar.grgit.Grgit.clone(
+            dir : 'src/client/repo',
+            uri : 'git@github.com:PushP0P/iEatWhat-Client.git'
+        )
+    }
+}
+
+task copyRepoToCurrent(type: Copy, dependsOn: cloneClient) {
+    group 'React Client'
+    description 'Copies the cloned repo into the current dir'
+    from 'repo'
+    into './'
+}
+
+task copyClientToPublic(type: Copy) {
+    group 'React Client'
+    description 'Copies bundle and resources to ratpacks tempalte dir'
+    assert file('build').exists()
+    println 'Copying build files'
+    from 'build'
+    into './../ratpack/public'
+}
+
+task copyIndextoTempalte(type: Copy, dependsOn: 'copyClientToPublic') {
+    group 'React Client'
+    description 'Copies index.html to the templates dir'
+    from './../ratpack/public/index.html'
+    into './../ratpack/templates'
+}
+
+processResources.dependsOn = ['yarn_build']
+
+yarn_build.dependsOn = ['yarn_install', 'copyIndextoTempalte']
+yarn_start.dependsOn = ['yarn_install']
+clean.dependsOn = ['copyIndextoTempalte', 'cleanNode']

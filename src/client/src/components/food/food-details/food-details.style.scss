@@ -1,0 +1,49 @@
+.food-details-component {
+  background: $pasta-salad no-repeat 50% 0 fixed;
+  background-size: cover;
+  padding-top: 270px;
+
+  .content_wrapper {
+    position: relative;
+    background: $color-background;
+  }
+
+  .header_image_box {
+    margin: auto;
+    margin-bottom: -50px;
+    height: 300px;
+    max-width: 70%;
+    overflow-x: hidden;
+    border-radius: 5px;
+    box-shadow: 2px 5px 5px 2px rgba(0, 0, 0, 0.8);
+
+    img {
+      height: 100%;
+    }
+  }
+
+  .food-details_header {
+    margin-bottom: -125px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    transform: translateY(-150px);
+
+    h1 {
+      text-shadow:
+        -1px -1px 0 $color-background,
+        1px -1px 0 $color-background,
+        -1px 1px 0 $color-background,
+        1px 1px 0 $color-background;
+      opacity: 0.8;
+    }
+  }
+
+  .categories_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+}
