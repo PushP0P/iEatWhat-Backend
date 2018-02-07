@@ -5,66 +5,65 @@ plugins{
 }
 apply plugin: "java"
 
-buildDir = new File("client-build")
-
-sourceSets {
-    main {
-        resources {
-            srcDir 'iEatBuild'
-        }
-    }
-}
-
-node {
-    workDir = file("${project.buildDir}/repo")
-}
-
-task cleanNode(type: Delete) {
-    group 'React Client'
-    description 'Removes files used to build the bundle'
-    println 'cleanNode called'
-    delete 'build'
-    delete 'node_modules'
-
-}
-
-task cloneClient() {
+task cloneClient {
     group 'React Client'
     description 'Clones the client repo'
-    println 'cloneClient called'
-    doLast{
+    println 'cloneClient config'
+    doFirst {
+        if (file('./repo').exists()) {
+            delete './repo'
+        }
         org.ajoberstar.grgit.Grgit.clone(
-            dir : 'src/client/repo',
-            uri : 'git@github.com:PushP0P/iEatWhat-Client.git'
+                dir: 'src/client/repo',
+                uri: 'git@github.com:PushP0P/iEatWhat-Client.git'
         )
+        copy {
+            println 'Copy repo config'
+            from 'repo'
+            into './'
+        }
+    }
+    doLast {
+        println 'Clone Last'
     }
 }
 
-task copyRepoToCurrent(type: Copy, dependsOn: cloneClient) {
-    group 'React Client'
-    description 'Copies the cloned repo into the current dir'
-    from 'repo'
-    into './'
+task copyAndClean {
+    doFirst {
+        println 'copy and clean'
+        copy {
+            println 'Copying build files'
+            from 'build'
+            into './../ratpack/public'
+        }
+        copy {
+            println 'copying index'
+            from './../ratpack/public/'
+            into './../ratpack/templates'
+            include 'index.html'
+        }
+    }
+    doLast {
+        println 'Deleting build files'
+        delete '.gradle'
+        delete 'build'
+        delete 'repo'
+        delete 'node_modules'
+        delete 'src'
+        delete 'public'
+        delete 'developer-resources'
+        delete 'client-build'
+        delete 'package.json'
+        delete 'README.md'
+        delete 'tsconfig.json'
+        delete 'tsconfig.test.jsonn'
+        delete 'tslint.json'
+        delete 'yarn.lock'
+        delete 'tsconfig.test.json'
+    }
 }
 
-task copyClientToPublic(type: Copy) {
-    group 'React Client'
-    description 'Copies bundle and resources to ratpacks tempalte dir'
-    assert file('build').exists()
-    println 'Copying build files'
-    from 'build'
-    into './../ratpack/public'
-}
-
-task copyIndextoTempalte(type: Copy, dependsOn: 'copyClientToPublic') {
-    group 'React Client'
-    description 'Copies index.html to the templates dir'
-    from './../ratpack/public/index.html'
-    into './../ratpack/templates'
-}
-
-processResources.dependsOn = ['yarn_build']
-
-yarn_build.dependsOn = ['yarn_install', 'copyIndextoTempalte']
+processResources.dependsOn = ['yarn_build', 'copyAndClean']
+copyAndClean.dependsOn = ['yarn_build']
+yarn_build.dependsOn = ['cloneClient', 'yarn_install']
 yarn_start.dependsOn = ['yarn_install']
-clean.dependsOn = ['copyIndextoTempalte', 'cleanNode']
