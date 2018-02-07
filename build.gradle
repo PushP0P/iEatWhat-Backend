@@ -13,7 +13,12 @@ mainClassName = "Main"
 
 dependencies {
     compile project(':src:api')
+
+    // Need to exclude for prod push, also its include in settings
+//    compile project(':src:client')
+
     runtime "org.slf4j:slf4j-simple:1.7.25"
+    compile "io.reactivex.rxjava2:rxjava:2.1.9"
     compile ratpack.dependency("hikari")
     compile "org.postgresql:postgresql:42.2.0"
     testCompile 'junit:junit:4.12'

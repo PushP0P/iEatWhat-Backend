@@ -1,0 +1,69 @@
+plugins{
+    id "com.moowork.node" version "1.2.0"
+    id 'org.ajoberstar.grgit' version '2.0.1'
+
+}
+apply plugin: "java"
+
+task cloneClient {
+    group 'React Client'
+    description 'Clones the client repo'
+    println 'cloneClient config'
+    doFirst {
+        if (file('./repo').exists()) {
+            delete './repo'
+        }
+        org.ajoberstar.grgit.Grgit.clone(
+                dir: 'src/client/repo',
+                uri: 'git@github.com:PushP0P/iEatWhat-Client.git'
+        )
+        copy {
+            println 'Copy repo config'
+            from 'repo'
+            into './'
+        }
+    }
+    doLast {
+        println 'Clone Last'
+    }
+}
+
+task copyAndClean {
+    doFirst {
+        println 'copy and clean'
+        copy {
+            println 'Copying build files'
+            from 'build'
+            into './../ratpack/public'
+        }
+        copy {
+            println 'copying index'
+            from './../ratpack/public/'
+            into './../ratpack/templates'
+            include 'index.html'
+        }
+    }
+    doLast {
+        println 'Deleting build files'
+        delete '.gradle'
+        delete 'build'
+        delete 'repo'
+        delete 'node_modules'
+        delete 'src'
+        delete 'public'
+        delete 'developer-resources'
+        delete 'client-build'
+        delete 'package.json'
+        delete 'README.md'
+        delete 'tsconfig.json'
+        delete 'tsconfig.test.jsonn'
+        delete 'tslint.json'
+        delete 'yarn.lock'
+        delete 'tsconfig.test.json'
+    }
+}
+
+processResources.dependsOn = ['yarn_build', 'copyAndClean']
+copyAndClean.dependsOn = ['yarn_build']
+yarn_build.dependsOn = ['cloneClient', 'yarn_install']
+yarn_start.dependsOn = ['yarn_install']

@@ -1,17 +1,9 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ratpack.handling.Handler;
-//import ratpack.handling.Context;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class PublicAPI {
-
-//    public Map<String, Handler> postRequestHandlers() {
-//        Map<String, Handler> handlers = new HashMap<>();
-//
-//        return handlers;
-//    }
 
     public Map<String, Handler> getRequestHandlers() {
         Map<String, Handler> handlers = new HashMap<>();
@@ -27,11 +19,4 @@ public class PublicAPI {
             });
         return handlers;
     }
-
-//    private void eventHandler(Context ctx) {
-//
-//    }
-
-
 }
-
