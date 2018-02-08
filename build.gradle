@@ -21,8 +21,6 @@ dependencies {
     compile "org.postgresql:postgresql:42.2.0"
 
     compile project(':src:api')
-    compile project(':src:event-manager')
-
     testCompile 'junit:junit:4.12'
 }
 

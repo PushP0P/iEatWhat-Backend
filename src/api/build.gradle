@@ -2,6 +2,8 @@ apply plugin : 'io.ratpack.ratpack-groovy'
 
 dependencies {
     compile project(':src:models')
+    compile project(':src:event-manager')
+
     runtime "org.slf4j:slf4j-simple:1.7.25"
     compile ratpack.dependency("hikari")
     compile project(':src:models')
