@@ -10,6 +10,7 @@ allprojects {
 
 mainClassName = "Main"
 
+
 dependencies {
     compile project(':src:api')
 

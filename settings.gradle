@@ -1,5 +1,4 @@
 rootProject.name = "i-eat-what-backend"
-
 include 'src:models', 'src:api'
 
 // need to exclude for prod push

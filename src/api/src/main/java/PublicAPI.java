@@ -6,8 +6,8 @@ import java.util.Map;
 public class PublicAPI {
 
     public Map<String, Handler> getRequestHandlers() {
-
         Map<String, Handler> handlers = new HashMap<>();
+        handlers.put("", (ctx) -> ctx.render("FOO BAT METAL"));
         handlers.put("public", (ctx) -> ctx.render("Public API Dynamic Success!"));
         handlers.put(
             "demo",
@@ -16,7 +16,7 @@ public class PublicAPI {
                 Article article = Article.demoData();
                 String articleAsString = om.writeValueAsString(article);
                 ctx.render(articleAsString);
-        });
+            });
         return handlers;
     }
 }
