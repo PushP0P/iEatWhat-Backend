@@ -10,6 +10,7 @@ allprojects {
 
 mainClassName = "Main"
 
+
 dependencies {
 // Need to exclude for prod push, also its include in settings
 //    compile project(':src:client')
