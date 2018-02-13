@@ -1,22 +1,22 @@
 public class Response {
     private boolean ok;
-    private Event event;
+    private String eventType;
     private String body;
     private String message;
 
-    public Response(boolean ok, String message, String body, Event event) {
+    public Response(boolean ok, String message, String body, String eventType) {
         this.setOk(ok);
         this.setMessage(message);
         this.setBody(body);
-        this.setEvent(event);
+        this.setEvent(eventType);
     }
 
     public void setBody(String body) {
         this.body = body;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEvent(String eventType) {
+        this.eventType = eventType;
     }
 
     public void setMessage(String message) {
@@ -27,8 +27,8 @@ public class Response {
         this.ok = ok;
     }
 
-    public Event getEvent() {
-        return event;
+    public String getEvent() {
+        return this.eventType;
     }
 
     public String getBody() {

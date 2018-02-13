@@ -29,9 +29,14 @@ public class PublicAPI {
         handlers.put("event", (ctx) -> {
             Promise<Form> form = ctx.parse(Form.class);
             form.then(f -> {
-                Event evt = new Event(f.get("type"), f.get("payload"));
-                String response = EventManager.dispatchEvent(evt);
-                ctx.render(response);
+                System.out.println("Form Data? \n\n" + f.getAll());
+                if (f.get("type") == null){
+                    ctx.render("{\"message\": \"No Body\"}");
+                } else {
+                    Event evt = new Event(f.get("type"), f.get("payload"));
+                    String response = this.om.writeValueAsString(EventManager.dispatchEvent(evt));
+                    ctx.render(response);
+                }
             });
         });
         return handlers;

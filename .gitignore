@@ -9,3 +9,5 @@ out
 .DS_Store
 classes
 node_modules
+secret/
+secret*

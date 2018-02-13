@@ -33,7 +33,6 @@ public class FoodItem {
         this.category_tags = category_tags;
     }
 
-
     public void setDescription(String description) {
         this.description = description;
     }
