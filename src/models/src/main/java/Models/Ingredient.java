@@ -1,3 +1,5 @@
+package Models;
+
 public class Ingredient {
     private String nutrient_id;
     private String name;

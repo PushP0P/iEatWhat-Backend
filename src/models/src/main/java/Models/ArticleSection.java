@@ -1,3 +1,5 @@
+package Models;
+
 public class ArticleSection {
     private String subTitle;
     private String[] paragraphs;

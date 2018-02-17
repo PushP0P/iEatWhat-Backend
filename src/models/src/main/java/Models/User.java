@@ -1,3 +1,7 @@
+package Models;
+
+import Models.Comment;
+
 public class User {
     private String id;
     private String first_name;

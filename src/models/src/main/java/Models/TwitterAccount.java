@@ -1,4 +1,6 @@
-public class GoogleAccount {
+package Models;
+
+public class TwitterAccount {
     private String id;
     private String id_token;
     private String account_owner;
@@ -6,9 +8,9 @@ public class GoogleAccount {
     private java.util.Date created_on;
     private java.util.Date updated_last;
 
-    public void GoogleAccount() {}
+    public void TwitterAccount() {}
 
-    public void GoogleAccount(String id, String id_token, String account_owner, String refresh_token, java.util.Date created_on) {
+    public void TwitterAccount(String id, String id_token, String account_owner, String refresh_token, java.util.Date created_on) {
         this.setAccount_owner(account_owner);
         this.setId(id);
         this.setId_token(id_token);

@@ -1,3 +1,5 @@
+package Models;
+
 public class Article {
 
     private String id;

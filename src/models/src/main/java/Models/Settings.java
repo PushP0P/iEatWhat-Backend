@@ -1,3 +1,5 @@
+package Models;
+
 public class Settings {
 
     // Would be different category tags?

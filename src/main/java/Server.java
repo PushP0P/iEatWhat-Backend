@@ -1,3 +1,4 @@
+import Models.Model;
 import ratpack.groovy.template.TextTemplateModule;
 import ratpack.guice.Guice;
 import ratpack.handling.Handler;
@@ -6,9 +7,7 @@ import ratpack.http.MutableHeaders;
 import ratpack.server.BaseDir;
 import ratpack.server.RatpackServer;
 import java.sql.*;
-
 import javax.sql.DataSource;
-import java.sql.Connection;
 import java.util.Map;
 
 import static ratpack.groovy.Groovy.groovyTemplate;
@@ -43,11 +42,12 @@ public class Server {
                     });
                 }
                 chain.get("", ctx -> ctx.render(groovyTemplate( "index.html")));
-                //chain.get(":view", ctx -> ctx.render(groovyTemplate( "index.html")));
                 chain.get("testdb", ctx -> {
                             DBManager test = new DBManager();
                             test.handle(ctx);
-                            String columns[] = {"username", "string", "password", "string"};
+                            Model model = new Model();
+                            test.insert(model);
+                            /*String columns[] = {"username", "string", "password", "string"};
                             String data[] = { "daniel", "pass"};
                             test.createTable("users", columns);
                             test.deleteAllFromTable("users");
@@ -56,23 +56,9 @@ public class Server {
                             String result = "";
                             for (String i:results) {
                                 result += i + " ";
-                            }
-                            ctx.render(result);
-                            /*Connection c = ctx.get(DataSource.class).getConnection();
-                            Statement statement = c.createStatement();
-                            String update, insert, query, results = "";
-                            update = "CREATE TABLE IF NOT EXISTS testTable ( name varchar(256))";
-                            insert = "INSERT INTO testTable VALUES ( name 'Daniel' );";
-                            query = "SELECT * FROM testTable;";
-                            statement.executeUpdate(update);
-                            statement.executeUpdate(insert);
-                            ResultSet rs = statement.executeQuery(query);
-                            while (rs.next()) {
-                                results = rs.getString(1);
-                            }
-                            ctx.render(results);*/
+                            }*/
+                            ctx.render("x");
                         });
-                //chain.path("test", ctx -> {ctx.getResponse() });
                 chain.get(":view", ctx -> ctx.render(groovyTemplate( "index.html")));
                 chain.files(f -> f.dir("public"));
             })

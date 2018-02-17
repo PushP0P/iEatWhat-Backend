@@ -1,0 +1,20 @@
+<hibernate-configuration>
+    <session-factory>
+        <!-- Connection -->
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/testdb</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">admin</property>
+
+        <!-- Dialect -->
+        <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
+
+        <!-- Schema -->
+        <property name="hbm2ddl.auto">create</property>
+
+        <!-- Production only! Remove when going live! Show queries created by hibernate in console -->
+        <property name="show_sql">true</property>
+        <!-- Map annotated entities -->
+        <mapping class="Models.Model"/>
+    </session-factory>
+</hibernate-configuration>

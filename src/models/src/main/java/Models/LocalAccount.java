@@ -1,3 +1,5 @@
+package Models;
+
 public class LocalAccount {
     private String id;
     private String id_token;

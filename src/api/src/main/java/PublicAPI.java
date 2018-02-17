@@ -1,3 +1,4 @@
+import Models.Article;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ratpack.handling.Handler;
 import java.util.HashMap;
