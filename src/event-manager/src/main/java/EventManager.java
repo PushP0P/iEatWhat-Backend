@@ -1,6 +1,3 @@
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.reactivex.subjects.Subject;
-
 public class EventManager {
     static void main(String... args) {
 
