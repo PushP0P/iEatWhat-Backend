@@ -6,4 +6,4 @@ include 'src:models',
         'src:workers'
 
 // need to exclude for prod push
-//include 'src:client'
+include 'src:client'

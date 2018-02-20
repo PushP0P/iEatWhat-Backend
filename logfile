@@ -9,3 +9,9 @@
 2018-02-19 20:42:46.893 PST [28561] LOG:  worker process: logical replication launcher (PID 28568) exited with exit code 1
 2018-02-19 20:42:46.893 PST [28563] LOG:  shutting down
 2018-02-19 20:42:46.899 PST [28561] LOG:  database system is shut down
+2018-02-19 21:56:55.781 PST [30045] LOG:  listening on IPv6 address "::1", port 5432
+2018-02-19 21:56:55.781 PST [30045] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2018-02-19 21:56:55.782 PST [30045] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2018-02-19 21:56:55.794 PST [30046] LOG:  database system was shut down at 2018-02-19 21:56:37 PST
+2018-02-19 21:56:55.797 PST [30045] LOG:  database system is ready to accept connections
+2018-02-19 21:57:20.334 PST [30058] FATAL:  database "-" does not exist
