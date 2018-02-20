@@ -11,3 +11,4 @@ classes
 node_modules
 secret/
 secret*
+*_pg

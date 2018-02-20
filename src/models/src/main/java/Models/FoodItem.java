@@ -3,7 +3,7 @@ package Models;
 public class FoodItem {
     private String id;
     private String name;
-    private String isbn;
+    private String upc;
     private String[] category_tags;
     private String description;
     private String slug;
@@ -14,13 +14,13 @@ public class FoodItem {
 
     }
 
-    public void FoodItem(String id, String name, String isbn,
+    public void FoodItem(String id, String name, String upc,
                          String[] category_tags, String description,
                          java.util.Date created_on, java.util.Date updated_last) {
         this.setId(id);
         this.setCategory_tags(category_tags);
         this.setDescription(description);
-        this.setIsbn(isbn);
+        this.setUPC(upc);
         this.setCreated_on(created_on);
         this.setSlug(slug);
         this.setUpdated_last(updated_last);
@@ -39,8 +39,8 @@ public class FoodItem {
         this.description = description;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setUPC(String isbn) {
+        this.upc = isbn;
     }
 
     public void setName(String name) {
@@ -75,8 +75,8 @@ public class FoodItem {
         return description;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getUPC() {
+        return upc;
     }
 
     public String getName() {

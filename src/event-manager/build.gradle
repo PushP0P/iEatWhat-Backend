@@ -3,5 +3,4 @@ apply plugin : 'io.ratpack.ratpack-groovy'
 
 dependencies {
     compile "io.reactivex.rxjava2:rxjava:2.1.9"
-    compile project(':src:auth')
 }
