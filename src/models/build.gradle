@@ -1,1 +1,10 @@
-apply plugin : 'java'
+apply plugin: "io.ratpack.ratpack-groovy"
+
+dependencies {
+
+    compile ratpack.dependency("hikari")
+    compile "org.postgresql:postgresql:42.2.0"
+    compile "org.hibernate:hibernate-core:5.2.13.Final"
+    compile "javax.transaction:jta:1.1"
+    testCompile 'junit:junit:4.12'
+}

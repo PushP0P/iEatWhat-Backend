@@ -5,8 +5,8 @@ public class Main {
 
     private static void initializeAPI() throws Exception {
         Server server = new Server();
-        PublicAPI publicAPI = new PublicAPI();
-        server.startServer(publicAPI.getRequestHandlers(), publicAPI.postRequestHandlers());
+        API API = new API();
+        server.startServer(API.getRequestHandlers(), API.postRequestHandlers());
     }
 
 }

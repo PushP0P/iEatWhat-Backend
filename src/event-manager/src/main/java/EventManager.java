@@ -16,8 +16,6 @@ public class EventManager {
         String domain = event.getType().split(":")[0];
 
         switch(domain) {
-            case "AUTH":
-                return om.writeValueAsString(Auth(event));
             case "PRIVATE":
                 break;
             default:
@@ -27,19 +25,7 @@ public class EventManager {
         return om.writeValueAsString(response);
     }
 
-    private static void FoodQuerey(String querey) {
+    private static void FoodQuery(String querey) {
         // TODO Wire up Managers
     }
-
-    private static Response Auth(Event event) {
-        String nameType = event.getType().split(":")[1];
-        GAuthManager gAuthManager = new GAuthManager();
-        switch (nameType) {
-            case"GOOGLE_URL":
-                return new Response(true, "Google auth url.", gAuthManager.getGeneratedAuthURL$(), event.getType());
-            default:
-                return new Response(false, "Auth manager not found.", "No Body", event.getType());
-        }
-    }
-
 }
