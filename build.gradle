@@ -14,6 +14,7 @@ dependencies {
     compile project(':src:api')
     compile project(':src:db-manager')
     compile project(':src:models')
+
 // Need to exclude for prod push, also its include in settings
     compile project(':src:client')
 
