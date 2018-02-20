@@ -10,20 +10,19 @@ allprojects {
 
 mainClassName = "Main"
 
-
 dependencies {
     compile project(':src:api')
-    compile project(':src:db')
+    compile project(':src:db-manager')
     compile project(':src:models')
-
-    // Need to exclude for prod push, also its include in settings
+// Need to exclude for prod push, also its include in settings
 //    compile project(':src:client')
 
-    runtime "org.slf4j:slf4j-simple:1.7.25"
     compile "io.reactivex.rxjava2:rxjava:2.1.9"
+    runtime "org.slf4j:slf4j-simple:1.7.25"
     compile ratpack.dependency("hikari")
     compile "org.postgresql:postgresql:42.2.0"
     compile "org.hibernate:hibernate-core:5.2.13.Final"
+
     testCompile 'junit:junit:4.12'
 }
 
