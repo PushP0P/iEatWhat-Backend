@@ -1,4 +1,3 @@
-import Models.Article;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ratpack.exec.Promise;
 import ratpack.form.Form;

@@ -1,5 +1,9 @@
 rootProject.name = "i-eat-what-backend"
-include 'src:models', 'src:api', 'src:event-manager', 'src:auth', 'src:db-manager'
+include 'src:models',
+        'src:api',
+        'src:event-manager',
+        'src:db-manager',
+        'src:workers'
 
 // need to exclude for prod push
 //include 'src:client'
