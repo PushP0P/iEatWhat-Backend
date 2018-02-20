@@ -11,7 +11,7 @@ public class EventManager {
         switch(domain) {
             case "TEST":
                 // Write the return value to a string for transport in the response object.
-                return TestEvent(event);
+                return TestDomain(event);
             case "PRIVATE":
                 break;
             default:
@@ -22,23 +22,22 @@ public class EventManager {
     }
 
     /**
-     * Test all the data!!!
-     * Setup how to handle the event...
+     * Filter Events into domains.
+     * Setup managers to handle the event in a domain.
      * @param evt
      * @return Response
      * @throws Exception
      */
-    private static Response TestEvent(Event evt) throws Exception {
+    private static Response TestDomain(Event evt) throws Exception {
         // Instantiate your manager to consume the Events payload.
         FakeManager fm = new FakeManager();
-
         String managerDone = fm.doSomething(evt.getPayload());
 
         // Managers that return a response should use the Response.class
         // if no response from manager still send a Response.ok == true
         Response response = new Response(
                 true,
-                "Manager done did.",
+                "Manager was here.",
                 managerDone,
                 evt.getType()
         );
