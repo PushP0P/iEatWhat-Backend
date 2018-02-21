@@ -26,8 +26,8 @@ public class Server {
                 b.module(HikariModule.class, hikariConfig -> {
                     hikariConfig.setDriverClassName("org.postgresql.Driver");
                     hikariConfig.addDataSourceProperty("URL", "jdbc:postgresql://localhost:5432/testdb");
-//                    hikariConfig.setUsername("postgres");
-//                    hikariConfig.setPassword("admin");
+                    hikariConfig.setUsername("postgres");
+                    hikariConfig.setPassword("admin");
                     hikariConfig.setJdbcUrl("jdbc:postgresql://localhost:5432/testdb");
                 }).bind(DBManager.class);
             }))
