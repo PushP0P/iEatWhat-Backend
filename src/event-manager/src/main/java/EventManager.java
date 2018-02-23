@@ -10,7 +10,7 @@ public class EventManager {
 
     }
 
-    // Our Event.type should follow a DOMAIN:MANAGER-NAME_TYPE convention
+    // Our Event.type should follow a EVENT:TYPE convention
     public static Response dispatchEvent(Event event) throws Exception {
         System.out.println("\n\nEventType \n" + event.getType());
         String domain = event.getType().split(":")[0];
