@@ -1,15 +1,12 @@
-import Models.FoodItem;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hibernate.*;
-
-import java.util.List;
+import java.util.HashMap;
 
 public class EventManager {
     static void main(String... args) {
 
     }
 
-    // Our Event.type should follow a DOMAIN:MANAGER-NAME_TYPE convention
+    // Our Event.type should follow a EVENT:TYPE convention
     public static Response dispatchEvent(Event event) throws Exception {
         System.out.println("\n\nEventType \n" + event.getType());
         String domain = event.getType().split(":")[0];
@@ -30,8 +27,8 @@ public class EventManager {
     }
 
     /**
-     * Test all the data!!!
-     * Setup how to handle the event...
+     * Each event handler should be static
+     * Shows: Setup how to handle an event.
      * @param evt
      * @return Response
      * @throws Exception
@@ -43,10 +40,10 @@ public class EventManager {
         String managerDone = fm.doSomething(evt.getPayload());
 
         // Managers that return a response should use the Response.class
-        // if no response from manager still send a Response.ok == true
+        // if manager is not suppose to respond then manually send a Response.ok == true
         Response response = new Response(
                 true,
-                "Manager done did.",
+                "Manager is done.",
                 managerDone,
                 evt.getType()
         );
@@ -57,18 +54,12 @@ public class EventManager {
 
     private static Response SearchEvent(Event evt) throws Exception {
         ObjectMapper om = new ObjectMapper();
-        Session session = HibernateUtil.getSessionFactory().openSession();
-//        Transaction transaction = session.getTransaction();
-//        FoodItem.add(session, transaction,"1234", "foo123142", "Test", "lorem ipsum" );
-        List<FoodItem> foodItemList = FoodItem.getAll(session);
-
-//       SearchManager searchManager = new SearchManager();
+        HashMap result = SearchManager.searchFood(evt.getPayload());
         return  new Response(
                 true,
                 "Search Results.",
-                om.writeValueAsString(foodItemList),
+                om.writeValueAsString(result),
                 evt.getType()
         );
-
     }
 }

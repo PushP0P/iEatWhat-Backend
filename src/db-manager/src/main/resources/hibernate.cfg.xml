@@ -19,5 +19,9 @@
         <!-- Map annotated entities -->
         <mapping class="Models.Model"/>
         <mapping class="Models.FoodItem"/>
+        <mapping class="USDA.Description"/>
+        <mapping class="USDA.Nutrient"/>
+        <mapping class="USDA.Measures"/>
+        <mapping class="USDA.Report"/>
     </session-factory>
 </hibernate-configuration>
