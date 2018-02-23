@@ -1,9 +1,5 @@
-import Models.FoodItem;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hibernate.*;
-
 import java.util.HashMap;
-import java.util.List;
 
 public class EventManager {
     static void main(String... args) {
@@ -31,8 +27,8 @@ public class EventManager {
     }
 
     /**
-     * Test all the data!!!
-     * Setup how to handle the event...
+     * Each event handler should be static
+     * Shows: Setup how to handle an event.
      * @param evt
      * @return Response
      * @throws Exception
@@ -44,10 +40,10 @@ public class EventManager {
         String managerDone = fm.doSomething(evt.getPayload());
 
         // Managers that return a response should use the Response.class
-        // if no response from manager still send a Response.ok == true
+        // if manager is not suppose to respond then manually send a Response.ok == true
         Response response = new Response(
                 true,
-                "Manager done did.",
+                "Manager is done.",
                 managerDone,
                 evt.getType()
         );
@@ -58,7 +54,6 @@ public class EventManager {
 
     private static Response SearchEvent(Event evt) throws Exception {
         ObjectMapper om = new ObjectMapper();
-
         HashMap result = SearchManager.searchFood(evt.getPayload());
         return  new Response(
                 true,
@@ -66,6 +61,5 @@ public class EventManager {
                 om.writeValueAsString(result),
                 evt.getType()
         );
-
     }
 }
