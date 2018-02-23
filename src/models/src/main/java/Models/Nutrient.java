@@ -1,16 +1,22 @@
 package Models;
 
-public class Ingredient {
-    private String nutrient_id;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity @Table(name="nutrient")
+public class Nutrient {
+    @Id
+    private String id;
     private String name;
     private String description;
     private String group;
 
-    public void Ingredient() {
+    public void Nutrient() {
 
     }
 
-    public void Ingredient(String nutrient_id, String name, String description, String group) {
+    public void Nutrient(String nutrient_id, String name, String description, String group) {
 
     }
 
@@ -26,8 +32,8 @@ public class Ingredient {
         this.group = group;
     }
 
-    public void setNutrient_id(String nutrient_id) {
-        this.nutrient_id = nutrient_id;
+    public void setId(String nutrient_id) {
+        this.id = nutrient_id;
     }
 
     public String getName() {
@@ -42,7 +48,7 @@ public class Ingredient {
         return group;
     }
 
-    public String getNutrient_id() {
-        return nutrient_id;
+    public String getId() {
+        return id;
     }
 }

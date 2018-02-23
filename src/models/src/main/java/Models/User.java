@@ -1,7 +1,5 @@
 package Models;
 
-import Models.Comment;
-
 public class User {
     private String id;
     private String first_name;
@@ -14,7 +12,7 @@ public class User {
     private java.util.Date create_on;
     private java.util.Date updated_last;
     private Enum role;
-    private Comment[] comments;
+    private Review[] reviews;
 
     public void User(){
 

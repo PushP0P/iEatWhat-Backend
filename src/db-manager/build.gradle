@@ -2,8 +2,7 @@ apply plugin: "io.ratpack.ratpack-groovy"
 
 dependencies {
     compile project(':src:models')
-    compile project(':src:api')
-    compile ratpack.dependency("hikari")
+//    compile project(':src:api')
     compile "org.postgresql:postgresql:42.2.0"
     compile "org.hibernate:hibernate-core:5.2.13.Final"
     compile "javax.transaction:jta:1.1"
