@@ -24,10 +24,10 @@ public class DBManager implements ratpack.handling.Handler {
 
 
     DBManager() throws SQLException {
-        tables = new String[] {"articles", "articleSections", "categories", "comments",
-                "foodItems", "userAccounts", "ingredients", "settings"};
-        defaultColumns = new String[] {"id", "int", "model", "longBlob"};
-        this.createSchema();
+//        tables = new String[] {"articles", "articleSections", "categories", "comments",
+//                "foodItems", "userAccounts", "ingredients", "settings"};
+//        defaultColumns = new String[] {"id", "int", "model", "longBlob"};
+//        this.createSchema();
     }
 
     private void createSchema() throws SQLException {
@@ -39,6 +39,10 @@ public class DBManager implements ratpack.handling.Handler {
     private static SessionFactory buildSessionFactory() {
         final ServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         return new MetadataSources(registry).buildMetadata().buildSessionFactory();
+    }
+
+    public static Session getSession() {
+        return sessionFactory.openSession();
     }
 
     public void insert(Model model) throws Exception {

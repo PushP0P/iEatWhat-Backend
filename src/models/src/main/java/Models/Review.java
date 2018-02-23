@@ -2,13 +2,13 @@ package Models;
 
 import java.util.Date;
 
-public class Comment {
+public class Review {
     private String id;
     private String author_id;
     private String text;
     private String topic;
     private String container_id;
-    private Comment[] replies;
+    private Review[] replies;
     private String slug;
     private java.util.Date created_on;
     private java.util.Date updated_last;
@@ -33,7 +33,7 @@ public class Comment {
         this.slug = slug;
     }
 
-    private void setReplies(Comment[] replies) {
+    private void setReplies(Review[] replies) {
         this.replies = replies;
     }
 
@@ -89,7 +89,7 @@ public class Comment {
         return topic;
     }
 
-    public Comment[] getReplies() {
+    public Review[] getReplies() {
         return this.replies;
     }
 

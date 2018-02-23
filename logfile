@@ -20,3 +20,12 @@
 2018-02-19 22:06:47.038 PST [30045] LOG:  worker process: logical replication launcher (PID 30052) exited with exit code 1
 2018-02-19 22:06:47.039 PST [30047] LOG:  shutting down
 2018-02-19 22:06:47.044 PST [30045] LOG:  database system is shut down
+2018-02-21 18:41:10.175 PST [35044] LOG:  listening on IPv6 address "::1", port 5432
+2018-02-21 18:41:10.175 PST [35044] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2018-02-21 18:41:10.176 PST [35044] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2018-02-21 18:41:10.189 PST [35045] LOG:  database system was shut down at 2018-02-21 18:40:55 PST
+2018-02-21 18:41:10.192 PST [35044] LOG:  database system is ready to accept connections
+2018-02-22 11:17:09.307 PST [35044] LOG:  received smart shutdown request
+2018-02-22 11:17:09.308 PST [35044] LOG:  worker process: logical replication launcher (PID 35051) exited with exit code 1
+2018-02-22 11:17:09.309 PST [35046] LOG:  shutting down
+2018-02-22 11:17:09.315 PST [35044] LOG:  database system is shut down

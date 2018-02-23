@@ -1,8 +1,12 @@
 package Models;
 
-public class Category {
+import javax.persistence.*;
 
+@Entity @Table(name = "category")
+public class Category {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
+    @Column
     private String tag;
     private String name;
     private String description;

@@ -1,8 +1,9 @@
 <hibernate-configuration>
     <session-factory>
         <!-- Connection -->
-        <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/testdb</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/testdb</property>
+        <property name="hibernate.jdbc.url">jdbc:postgresql://127.0.0.1:5432/testdb</property>
         <!--<property name="connection.username">postgres</property>-->
         <!--<property name="connection.password">admin</property>-->
 
@@ -14,7 +15,9 @@
 
         <!-- Production only! Remove when going live! Show queries created by hibernate in console -->
         <property name="show_sql">true</property>
+
         <!-- Map annotated entities -->
         <mapping class="Models.Model"/>
+        <mapping class="Models.FoodItem"/>
     </session-factory>
 </hibernate-configuration>
