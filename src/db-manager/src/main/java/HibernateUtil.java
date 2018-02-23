@@ -2,12 +2,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Models.*;
+import USDA.Description;
+import USDA.Measures;
+import USDA.Nutrient;
+import USDA.Report;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
 
@@ -53,6 +56,9 @@ public class HibernateUtil {
                         .addAnnotatedClass(Model.class)
                         .addAnnotatedClass(Category.class)
                         .addAnnotatedClass(Review.class)
+                        .addAnnotatedClass(Report.class)
+                        .addAnnotatedClass(Measures.class)
+                        .addAnnotatedClass(Description.class)
                         .addAnnotatedClass(Nutrient.class);
                 Metadata metadata = sources.getMetadataBuilder().build();
                 sessionFactory = metadata.getSessionFactoryBuilder().build();

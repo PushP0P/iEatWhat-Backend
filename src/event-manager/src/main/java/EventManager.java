@@ -2,6 +2,7 @@ import Models.FoodItem;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class EventManager {
@@ -57,16 +58,12 @@ public class EventManager {
 
     private static Response SearchEvent(Event evt) throws Exception {
         ObjectMapper om = new ObjectMapper();
-        Session session = HibernateUtil.getSessionFactory().openSession();
-//        Transaction transaction = session.getTransaction();
-//        FoodItem.add(session, transaction,"1234", "foo123142", "Test", "lorem ipsum" );
-        List<FoodItem> foodItemList = FoodItem.getAll(session);
 
-//       SearchManager searchManager = new SearchManager();
+        HashMap result = SearchManager.searchFood(evt.getPayload());
         return  new Response(
                 true,
                 "Search Results.",
-                om.writeValueAsString(foodItemList),
+                om.writeValueAsString(result),
                 evt.getType()
         );
 
