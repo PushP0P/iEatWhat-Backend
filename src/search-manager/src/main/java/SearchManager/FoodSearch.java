@@ -9,7 +9,10 @@ public class FoodSearch {
     }
 
     public static void searchFood() throws Exception {
-        DBManager.insert(new Review("foo", "Bar", "Bas", "Bat", "Metal"));
+        Review review = new Review("Rock", "Bar", "Bas", "Bat", "Metal");
+        DBManager.insert(review);
+        review.setAuthor_id("New Author");
+        DBManager.insert(review);
     }
 
 }

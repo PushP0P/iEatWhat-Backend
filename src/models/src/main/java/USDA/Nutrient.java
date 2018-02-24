@@ -3,12 +3,12 @@ package USDA;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity @Table(name="NUTRIENT")
+//@Entity @Table(name="NUTRIENT")
 public class Nutrient {
-    @Id
-    @ManyToMany
-    public String nutrient_number;
-    @OneToMany(mappedBy = "nutrient")
+//    @Id
+//    @ManyToMany
+//    public String nutrient_number;
+//    @OneToMany(mappedBy = "nutrient")
     public Set<Measures> measures;
     public String nutrientName;
     public String listOfSourceId;

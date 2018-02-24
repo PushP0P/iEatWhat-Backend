@@ -9,20 +9,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name="food_item")
+//@Entity
+//@Table(name="food_item")
 public class FoodItem {
-    @Id
+//    @Id
     private String ndbno;
-    @Column(name="name")
+//    @Column(name="name")
     private String name;
     private String upc;
-    @OneToMany
+//    @OneToMany
     private List<Category> categories;
     private String description;
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private java.util.Date created_on;
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date updated_last;
 
     public FoodItem() {

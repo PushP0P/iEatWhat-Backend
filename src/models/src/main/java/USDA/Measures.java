@@ -2,13 +2,13 @@ package USDA;
 
 import javax.persistence.*;
 
-@Entity @Table(name = "MEASURES")
+//@Entity @Table(name = "MEASURES")
 public class Measures {
-    @Id
+//    @Id
     public String measure_id;
     public String name;
-    @ManyToOne
-    @JoinColumn(name = "nutrientNumber")
+//    @ManyToOne
+//    @JoinColumn(name = "nutrientNumber")
     public Nutrient nutrient;
     public String eUnitEquivalent;
     public String equivalentUnit;

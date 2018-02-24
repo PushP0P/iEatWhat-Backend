@@ -6,13 +6,13 @@ import org.hibernate.Transaction;
 import javax.persistence.*;
 import java.util.Map;
 
-@Entity @Table(name = "DESCRIPTION")
+//@Entity @Table(name = "DESCRIPTION")
 public class Description {
-    @Id
+//    @Id
     public String ndbno;
     public String key = "desc";
-    @OneToOne
-    @JoinColumn(name = "report_id")
+//    @OneToOne
+//    @JoinColumn(name = "report_id")
     public Report report;
     public String name;
     public String sd;

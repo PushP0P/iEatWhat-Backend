@@ -1,17 +1,16 @@
 package Workers;
 
-import HibernateManager.HibernateUtil;
-import Models.FoodItem;
+//import HibernateManager.HibernateUtil;
+//import Models.FoodItem;
 import Utilities.HTTPSRequest;
 import Utilities.URLBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+//import org.hibernate.Session;
+//import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class FoodData {
@@ -36,9 +35,9 @@ public class FoodData {
     }
 
     public static void updateDBWithReport(Map<String, Object> report) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.getTransaction();
-
-        FoodItem.add(session, transaction,"1234", "foo123142", "Test", "lorem ipsum" );
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Transaction transaction = session.getTransaction();
+//
+//        FoodItem.add(session, transaction,"1234", "foo123142", "Test", "lorem ipsum" );
     }
 }

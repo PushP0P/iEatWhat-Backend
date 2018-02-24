@@ -7,13 +7,13 @@ import javax.persistence.*;
 import java.util.Map;
 import java.util.Set;
 
-@Entity @Table(name = "REPORT")
+//@Entity @Table(name = "REPORT")
 public class Report {
-    @Id
+//    @Id
     private String ndbno;
-    @OneToOne(mappedBy = "report")
+//    @OneToOne(mappedBy = "report")
     private Description description;
-    @OneToMany(mappedBy = "report")
+//    @OneToMany(mappedBy = "report")
     private Set<Nutrient> nutrients;
 
     public Report(){

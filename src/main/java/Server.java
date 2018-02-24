@@ -1,7 +1,9 @@
+import DBManager.DBManager;
 import ratpack.groovy.template.TextTemplateModule;
 import ratpack.guice.Guice;
 import ratpack.handling.Chain;
 import ratpack.handling.Handler;
+import ratpack.hikari.HikariModule;
 import ratpack.http.MutableHeaders;
 import ratpack.server.BaseDir;
 import ratpack.server.RatpackServer;
@@ -12,24 +14,31 @@ import static ratpack.groovy.Groovy.groovyTemplate;
 public class Server {
     public void startServer(Map<String, Handler> getHandlers, Map<String, Handler> postHandlers) throws Exception {
         RatpackServer.start(server -> server
-            .serverConfig(config -> config
-            .onError(System.out::println)
-            .baseDir(BaseDir.find())
-            .env())
-            .registry(Guice.registry(b -> {
-                b.module(TextTemplateModule.class, conf -> conf.setStaticallyCompile(true));
-            }))
-            .handlers(chain -> {
-                chain.prefix("get", api -> {
-                    headers(getHandlers, api);
-                });
-                chain.prefix("post", api -> {
-                    headers(postHandlers, api);
-                });
-                chain.get("", ctx -> ctx.render(groovyTemplate( "index.html")));
-                chain.get(":view", ctx -> ctx.render(groovyTemplate( "index.html")));
-                chain.files(f -> f.dir("public"));
-            })
+                .serverConfig(config -> config
+                        .onError(System.out::println)
+                        .baseDir(BaseDir.find())
+                        .env())
+                .registry(Guice.registry(b -> {
+//                    b.module(HikariModule.class, hikariConfig -> {
+//                        hikariConfig.setDriverClassName("org.postgresql.Driver");
+//                        hikariConfig.addDataSourceProperty("URL", "jdbc:postgresql://localhost:5432/testdb");
+////                    hikariConfig.setUsername("postgres");
+////                    hikariConfig.setPassword("admin");
+//                        hikariConfig.setJdbcUrl("jdbc:postgresql://localhost:5432/testdb");
+//                    }).bind(DBManager.class);
+                    b.module(TextTemplateModule.class, conf -> conf.setStaticallyCompile(true));
+                }))
+                .handlers(chain -> {
+                    chain.prefix("get", api -> {
+                        headers(getHandlers, api);
+                    });
+                    chain.prefix("post", api -> {
+                        headers(postHandlers, api);
+                    });
+                    chain.get("", ctx -> ctx.render(groovyTemplate( "index.html")));
+                    chain.get(":view", ctx -> ctx.render(groovyTemplate( "index.html")));
+                    chain.files(f -> f.dir("public"));
+                })
         );
     }
 

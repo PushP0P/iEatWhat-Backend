@@ -30,24 +30,24 @@ public class Review extends Model {
             this.setTopic(topic);
     }
 
-    private void setSlug(String slug) {
+    public void setSlug(String slug) {
         this.slug = slug;
     }
 
 
-    private void setAuthor_id(String author_id) {
+    public void setAuthor_id(String author_id) {
         this.author_id = author_id;
     }
 
-    private void setContainer_id(String container_id) {
+    public void setContainer_id(String container_id) {
         this.container_id = container_id;
     }
 
-    private void setText(String text) {
+    public void setText(String text) {
         this.text = text;
     }
 
-    private void setTopic(String topic) {
+    public void setTopic(String topic) {
         this.topic = topic;
     }
 

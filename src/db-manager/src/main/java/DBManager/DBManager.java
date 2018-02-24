@@ -5,13 +5,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
 import org.hibernate.service.Service;
 import org.hibernate.service.ServiceRegistry;
 import ratpack.handling.Context;
 import Models.*;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.io.*;
+import java.util.List;
 
 
 public class DBManager implements ratpack.handling.Handler {
@@ -47,6 +53,24 @@ public class DBManager implements ratpack.handling.Handler {
         return sessionFactory.openSession();
     }
 
+    public static List<Model> find(Model model) {
+        Session session = sessionFactory.openSession();
+        //Begin a session transaction
+        session.beginTransaction();
+        // Form a criteria
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Model> query = builder.createQuery(Model.class);
+        Root<Model> root = query.from(Model.class);
+        query.select(root);
+        Query<Model> q = session.createQuery(query);
+        List<Model> list = q.getResultList();
+        //Commit the transaction
+        session.getTransaction().commit();
+        //Close the session
+        session.close();
+        return list;
+    }
+
     public static void insert(Model model) throws Exception {
         System.out.printf("In Insert");
         //Create a new hibernate session
@@ -54,7 +78,7 @@ public class DBManager implements ratpack.handling.Handler {
         //Begin a session transaction
         session.beginTransaction();
         //Save it to the session
-        session.save(model);
+        session.saveOrUpdate(model);
         //Commit the change to the database
         session.getTransaction().commit();
         //Close the session
