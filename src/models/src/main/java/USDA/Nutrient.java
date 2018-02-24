@@ -6,10 +6,8 @@ import java.util.Set;
 @Entity @Table(name="NUTRIENT")
 public class Nutrient {
     @Id
+    @ManyToMany
     public String nutrient_number;
-    @ManyToOne
-    @JoinColumn(name = "report_id")
-    public Report report;
     @OneToMany(mappedBy = "nutrient")
     public Set<Measures> measures;
     public String nutrientName;

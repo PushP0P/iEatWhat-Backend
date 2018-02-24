@@ -1,3 +1,4 @@
+import SearchManager.FoodSearch;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 
@@ -54,7 +55,7 @@ public class EventManager {
 
     private static Response SearchEvent(Event evt) throws Exception {
         ObjectMapper om = new ObjectMapper();
-        HashMap result = SearchManager.searchFood(evt.getPayload());
+        HashMap result = FoodSearch.searchFood(evt.getPayload());
         return  new Response(
                 true,
                 "Search Results.",

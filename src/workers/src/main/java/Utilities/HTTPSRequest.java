@@ -1,3 +1,5 @@
+package Utilities;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +8,7 @@ import java.net.URL;
 
 public class HTTPSRequest {
 
-    static String getRequest(URL url) throws IOException {
+    public static String getRequest(URL url) throws IOException {
         HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -20,4 +22,5 @@ public class HTTPSRequest {
         con.disconnect();
         return content.toString();
     }
+
 }
