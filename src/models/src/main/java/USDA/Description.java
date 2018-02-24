@@ -34,7 +34,6 @@ public class Description {
     }
 
     public Description(String description_id, Report report, String ndbno, String name, String sd, String group, String sn, String cn, String manu, int nf, int cf, int ff, int pf, String r, String rd, String ds, String ru) {
-        this.setDescription_id(description_id);
         this.setReport(report);
         this.setNdbno(ndbno);
         this.setName(name);
@@ -51,14 +50,6 @@ public class Description {
         this.setRd(rd);
         this.setDs(ds);
         this.setRu(ru);
-    }
-
-    public String getDescription_id() {
-        return description_id;
-    }
-
-    private void setDescription_id(String description_id) {
-        this.description_id = description_id;
     }
 
     public String getKey() {

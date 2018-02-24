@@ -1,3 +1,5 @@
+package DBManager;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -45,7 +47,7 @@ public class DBManager implements ratpack.handling.Handler {
         return sessionFactory.openSession();
     }
 
-    public void insert(Model model) throws Exception {
+    public static void insert(Model model) throws Exception {
         System.out.printf("In Insert");
         //Create a new hibernate session
         Session session = sessionFactory.openSession();

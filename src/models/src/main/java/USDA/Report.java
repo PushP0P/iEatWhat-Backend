@@ -51,10 +51,10 @@ public class Report {
     }
 
     public static void add(Session session, Transaction transaction, String ndbno, Map<String, Object> desc, Set<Nutrient> nutrients ) {
-        transaction.begin();
-        Report report = new Report(ndbno, new Description(), new Set<Nutrient>()} {
-        })
-        Description.add(desc);
+//        transaction.begin();
+//        Report report = new Report(ndbno, new Description(), new Set<Nutrient>()} {
+//        })
+//        Description.add(desc);
 
 
     }

@@ -19,6 +19,7 @@
         <!-- Map annotated entities -->
         <mapping class="Models.Model"/>
         <mapping class="Models.FoodItem"/>
+        <mapping class="Models.Review"/>
         <mapping class="USDA.Description"/>
         <mapping class="USDA.Nutrient"/>
         <mapping class="USDA.Measures"/>
