@@ -4,26 +4,30 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-//@Entity @Table(name = "REPORT")
+@Entity
 public class Report {
-//    @Id
+    @Id
     private String ndbno;
-//    @OneToOne(mappedBy = "report")
+    @OneToOne(mappedBy = "report")
     private Description description;
-//    @OneToMany(mappedBy = "report")
+    @OneToMany(mappedBy = "report")
     private Set<Nutrient> nutrients;
 
-    public Report(){
-
-    }
+    public Report(){}
 
     public Report(String ndbno, Description description, Set<Nutrient> nutrients){
         this.setNdbno(ndbno);
         this.setDescription(description);
         this.setNutrients(nutrients);
+    }
+
+    public Report(Session session, HashMap<String, Object> hashMap) {
+ //       Transaction transaction = session.getTransaction();
+ //       this.description = new Description().add(session, transaction, hashMap.get("desc"));
     }
 
     private void setNdbno(String ndbno) {
@@ -55,7 +59,6 @@ public class Report {
 //        Report report = new Report(ndbno, new Description(), new Set<Nutrient>()} {
 //        })
 //        Description.add(desc);
-
 
     }
 }
