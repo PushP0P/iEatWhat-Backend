@@ -8,21 +8,23 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-//@Entity
-//@Table(name="food_item")
+@Entity
 public class FoodItem {
-//    @Id
+    @Id
     private String ndbno;
-//    @Column(name="name")
+    @Column
     private String name;
+    @Column
     private String upc;
-//    @OneToMany
-    private List<Category> categories;
+    @OneToMany
+    private Set<Category> categories;
+    @Column
     private String description;
-//    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private java.util.Date created_on;
-//    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date updated_last;
 
     public FoodItem() {

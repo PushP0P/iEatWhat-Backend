@@ -1,18 +1,23 @@
 package Models;
 
-public class Settings {
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
+
+public class Settings extends Model{
 
     // Would be different category tags?
+    @OneToMany
     private String[] constraints;
+    @Column
     private boolean google_linked;
+    @Column
     private boolean twittter_linked;
+    @Column
     private boolean local_linked;
 
-    public void Settings(){
+    public Settings(){}
 
-    }
-
-    public void Settings(String[] constraints, boolean google_linked, boolean twittter_linked,
+    public Settings(String[] constraints, boolean google_linked, boolean twittter_linked,
                          boolean local_linked){
         this.setConstraints(constraints);
         this.setGoogle_linked(google_linked);

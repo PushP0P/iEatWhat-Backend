@@ -2,31 +2,36 @@ package Models;
 
 import javax.persistence.*;
 
-@Entity @Table(name = "category")
-public class Category {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+@Entity
+public class Category extends Model {
     @Column
     private String tag;
+    @Column
     private String name;
+    @Column
     private String description;
+    @Column
     private String icon;
 
-    public void Category() {
+    public Category() {
 
     }
 
-    public void Category(String id, String name, String tag,
-                         String description, String icon) {
-        this.setId(id);
+    public Category(String name, String tag, String description, String icon) {
         this.setName(name);
         this.setTag(tag);
         this.setDescription(description);
         this.setIcon(icon);
     }
 
-    public void setId(String id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "Category{" +
+                "tag='" + tag + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", icon='" + icon + '\'' +
+                '}';
     }
 
     public void setName(String name) {
@@ -51,10 +56,6 @@ public class Category {
 
     public String getDescription() {
         return description;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getIcon() {

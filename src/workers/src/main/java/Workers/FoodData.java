@@ -2,6 +2,7 @@ package Workers;
 
 //import HibernateManager.HibernateUtil;
 //import Models.FoodItem;
+import USDA.Report;
 import Utilities.HTTPSRequest;
 import Utilities.URLBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,6 +35,10 @@ public class FoodData {
         return om.readValue(HTTPSRequest.getRequest(new URL( URLBuilders.buildBaseUSDAURL(USDAUrl, "V2/reports") +  URLBuilders.getParamsString(params))), HashMap.class);
     }
 
+    private Report hashMapToReport(HashMap<String,String> USDAData) throws Exception {
+        System.out.printf(USDAData.toString());
+        return new Report();
+    }
     public static void updateDBWithReport(Map<String, Object> report) {
 //        Session session = HibernateUtil.getSessionFactory().openSession();
 //        Transaction transaction = session.getTransaction();

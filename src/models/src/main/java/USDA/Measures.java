@@ -2,16 +2,18 @@ package USDA;
 
 import javax.persistence.*;
 
-//@Entity @Table(name = "MEASURES")
+@Entity
 public class Measures {
-//    @Id
+    @Id
     public String measure_id;
+    @Column
     public String name;
-//    @ManyToOne
-//    @JoinColumn(name = "nutrientNumber")
-    public Nutrient nutrient;
+    @Column
     public String eUnitEquivalent;
+    @Column
     public String equivalentUnit;
+    @Column
     public String gramEquivalent;
+    @Column
     public String referenceSource;
 }

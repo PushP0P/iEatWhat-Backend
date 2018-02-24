@@ -1,10 +1,16 @@
 package Models;
 
-public class Article {
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
 
+public class Article extends Model{
+    @Column
     private String id;
+    @Column
     private String title;
+    @Column
     private String blurb;
+    @OneToMany
     private ArticleSection[] sections;
 
     public Article(){}

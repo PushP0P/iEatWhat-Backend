@@ -55,10 +55,10 @@ public class EventManager {
 
     private static Response SearchEvent(Event evt) throws Exception {
         ObjectMapper om = new ObjectMapper();
-        FoodSearch.searchFood();
+        String stringResult = FoodSearch.searchFood();
         return  new Response(
                 true,
-                "Search Results.",
+                stringResult,//"Search Results.",
                 "Test insert",
                 evt.getType()
         );

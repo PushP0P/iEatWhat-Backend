@@ -4,37 +4,52 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.persistence.*;
-import java.util.Map;
+import java.util.HashMap;
 
-//@Entity @Table(name = "DESCRIPTION")
+@Entity
 public class Description {
-//    @Id
+    @Id
     public String ndbno;
+    @Column
     public String key = "desc";
 //    @OneToOne
 //    @JoinColumn(name = "report_id")
-    public Report report;
+//    public Report report;
+    @Column
     public String name;
+    @Column
     public String sd;
+    @Column
     public String group;
+    @Column
     public String sn;
+    @Column
     public String cn;
+    @Column
     public String manu;
+    @Column
     public int nf;
+    @Column
     public int cf;
+    @Column
     public int ff;
+    @Column
     public int pf;
+    @Column
     public String r;
+    @Column
     public String rd;
+    @Column
     public String ds;
+    @Column
     public String ru;
 
-    Description() {
+    public Description() {}
 
-    }
-
-    public Description(String description_id, Report report, String ndbno, String name, String sd, String group, String sn, String cn, String manu, int nf, int cf, int ff, int pf, String r, String rd, String ds, String ru) {
-        this.setReport(report);
+    public Description(String description_id, /*Report report,*/ String ndbno, String name, String sd, String group,
+                       String sn, String cn, String manu, int nf, int cf, int ff, int pf, String r, String rd,
+                       String ds, String ru) {
+        //this.setReport(report);
         this.setNdbno(ndbno);
         this.setName(name);
         this.setSd(sd);
@@ -60,13 +75,13 @@ public class Description {
         this.key = key;
     }
 
-    public Report getReport() {
+/*    public Report getReport() {
         return report;
     }
 
     private void setReport(Report report) {
         this.report = report;
-    }
+    }*/
 
     public String getNdbno() {
         return ndbno;
@@ -188,11 +203,11 @@ public class Description {
         this.ru = ru;
     }
 
-    public static void add(Session session, Transaction transaction, Report report, Map<String, Object> descriptionValues) {
+    public static Description add(Session session, Transaction transaction, /*Report report,*/HashMap<String,Object> descriptionValues) {
         transaction.begin();
         Description description = new Description(
             (String) descriptionValues.get("ndbno"),
-            report,
+            //report,
             (String) descriptionValues.get("ndbno"),
             (String) descriptionValues.get("name"),
             (String) descriptionValues.get("sd"),
@@ -212,5 +227,6 @@ public class Description {
         session.saveOrUpdate(description);
         transaction.commit();
 
+        return description;
     }
 }

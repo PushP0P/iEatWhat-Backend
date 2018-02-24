@@ -1,8 +1,15 @@
 package Models;
 
-public class ArticleSection {
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
+
+public class ArticleSection extends Model {
+    @Column
     private String subTitle;
+    @OneToMany
     private String[] paragraphs;
+
+    public ArticleSection() {}
 
     public ArticleSection(String subTitle, String... paragraphs) {
         setSubTitle(subTitle);

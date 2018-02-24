@@ -30,6 +30,18 @@ public class Review extends Model {
             this.setTopic(topic);
     }
 
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "author_id='" + author_id + '\'' +
+                ", text='" + text + '\'' +
+                ", topic='" + topic + '\'' +
+                ", container_id='" + container_id + '\'' +
+                ", slug='" + slug + '\'' +
+                '}';
+    }
+
     public void setSlug(String slug) {
         this.slug = slug;
     }
