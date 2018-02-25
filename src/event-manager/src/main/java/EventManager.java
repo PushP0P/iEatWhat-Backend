@@ -1,6 +1,5 @@
 import SearchManager.FoodSearch;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.HashMap;
 
 public class EventManager {
     static void main(String... args) {
@@ -54,12 +53,13 @@ public class EventManager {
     }
 
     private static Response SearchEvent(Event evt) throws Exception {
+
         ObjectMapper om = new ObjectMapper();
-        String stringResult = FoodSearch.searchFood();
+        String result = om.writeValueAsString(FoodSearch.getReport(evt.getPayload()));
         return  new Response(
                 true,
-                stringResult,//"Search Results.",
-                "Test insert",
+                "Search Results.",
+                result,
                 evt.getType()
         );
     }

@@ -8,8 +8,8 @@ public class SearchResults {
     List<?> matches;
 
     public SearchResults(Class<?>[] items) {
-        List<Class<?>> list = new ArrayList<>();
-        Collections.addAll(list, items);
+        List<?> list = new ArrayList<>();
+//        Collections.addAll(list, items);
         setMatches(list);
     }
 

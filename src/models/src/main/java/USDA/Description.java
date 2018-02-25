@@ -5,14 +5,13 @@ import org.hibernate.Transaction;
 
 import javax.persistence.*;
 import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 public class Description {
     @Id
     public String ndbno;
-    @Column
-    public String key = "desc";
-//    @OneToOne
+    //    @OneToOne
 //    @JoinColumn(name = "report_id")
 //    public Report report;
     @Column
@@ -44,44 +43,14 @@ public class Description {
     @Column
     public String ru;
 
-    public Description() {}
+    public Description() {
+    }
 
-    public Description(String description_id, /*Report report,*/ String ndbno, String name, String sd, String group,
-                       String sn, String cn, String manu, int nf, int cf, int ff, int pf, String r, String rd,
-                       String ds, String ru) {
-        //this.setReport(report);
+    public Description(String ndbno, String name, String manu) {
         this.setNdbno(ndbno);
         this.setName(name);
-        this.setSd(sd);
-        this.setGroup(group);
-        this.setSn(sn);
-        this.setCn(cn);
         this.setManu(manu);
-        this.setNf(nf);
-        this.setCf(cf);
-        this.setFf(ff);
-        this.setPf(pf);
-        this.setR(r);
-        this.setRd(rd);
-        this.setDs(ds);
-        this.setRu(ru);
     }
-
-    public String getKey() {
-        return key;
-    }
-
-    private void setKey(String key) {
-        this.key = key;
-    }
-
-/*    public Report getReport() {
-        return report;
-    }
-
-    private void setReport(Report report) {
-        this.report = report;
-    }*/
 
     public String getNdbno() {
         return ndbno;
@@ -203,30 +172,116 @@ public class Description {
         this.ru = ru;
     }
 
-    public static Description add(Session session, Transaction transaction, /*Report report,*/HashMap<String,Object> descriptionValues) {
+    public static Description add(Session session, Transaction transaction, Map<String, String> descriptionValues) {
         transaction.begin();
-        Description description = new Description(
-            (String) descriptionValues.get("ndbno"),
-            //report,
-            (String) descriptionValues.get("ndbno"),
-            (String) descriptionValues.get("name"),
-            (String) descriptionValues.get("sd"),
-            (String) descriptionValues.get("group"),
-            (String) descriptionValues.get("sn"),
-            (String) descriptionValues.get("cn"),
-            (String) descriptionValues.get("manu"),
-            (int) descriptionValues.get("nf"),
-            (int) descriptionValues.get("cf"),
-            (int) descriptionValues.get("ff"),
-            (int) descriptionValues.get("pf"),
-            (String) descriptionValues.get("r"),
-            (String) descriptionValues.get("rd"),
-            (String) descriptionValues.get("ds"),
-            (String) descriptionValues.get("ru")
-        );
+        System.out.println(" Description Values \n" + descriptionValues.toString());
+        Description description = new Description() {
+        };
+        for (Map.Entry prop : descriptionValues.entrySet()) {
+        }
         session.saveOrUpdate(description);
         transaction.commit();
 
         return description;
     }
+
+    public static class Builder {
+        public String ndbno = "no value";
+        public String name = "no value";
+        public String sd = "no value";
+        public String group = "no value";
+        public String sn = "no value";
+        public String cn = "no value";
+        public String manu = "no value";
+        public int nf = -1;
+        public int cf = -1;
+        public int ff = -1;
+        public int pf = -1;
+        public String r = "no value";
+        public String rd = "no value";
+        public String ds = "no value";
+        public String ru = "no value";
+
+        public Builder withNdbno(String ndbno) {
+            this.ndbno = ndbno;
+            return this;
+        }
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withSd(String sd) {
+            this.sd = sd;
+            return this;
+        }
+
+        public Builder withGroup(String group) {
+            this.group = group;
+            return this;
+        }
+
+        public Builder withSn(String sn) {
+            this.sn = sn;
+            return this;
+        }
+
+        public Builder withCn(String cn) {
+            this.cn = cn;
+            return this;
+        }
+
+        public Builder withManu(String manu) {
+            this.manu = manu;
+            return this;
+        }
+
+        public Builder withNf(int nf) {
+            this.nf = nf;
+            return this;
+        }
+
+        public Builder withCf(int cf) {
+            this.cf = cf;
+            return this;
+        }
+
+        public Builder withFf(int ff) {
+            this.ff = ff;
+            return this;
+        }
+
+        public Builder withPf(int pf) {
+            this.pf = pf;
+            return this;
+        }
+
+        public Builder withR(String r) {
+            this.r = r;
+            return this;
+        }
+
+        public Builder withRd(String rd) {
+            this.rd = rd;
+            return this;
+        }
+
+        public Builder withDs(String ds) {
+            this.ds = ds;
+            return this;
+        }
+
+        public Builder withRu(String ru) {
+            this.ru = ru;
+            return this;
+        }
+
+//        public Description build() {
+//
+//        }
+
+    }
+
+
 }

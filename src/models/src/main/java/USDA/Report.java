@@ -12,17 +12,17 @@ import java.util.Set;
 public class Report {
     @Id
     private String ndbno;
-    @OneToOne(mappedBy = "report")
-    private Description description;
-    @OneToMany(mappedBy = "report")
-    private Set<Nutrient> nutrients;
+//    @OneToOne(mappedBy = "report")
+//    private Description description;
+//    @OneToMany(mappedBy = "report")
+//    private Set<Nutrient> nutrients;
 
     public Report(){}
 
     public Report(String ndbno, Description description, Set<Nutrient> nutrients){
         this.setNdbno(ndbno);
-        this.setDescription(description);
-        this.setNutrients(nutrients);
+//        this.setDescription(description);
+//        this.setNutrients(nutrients);
     }
 
     public Report(Session session, HashMap<String, Object> hashMap) {
@@ -34,25 +34,25 @@ public class Report {
         this.ndbno = ndbno;
     }
 
-    private void setDescription(Description description) {
-        this.description = description;
-    }
-
-    private void setNutrients(Set<Nutrient> nutrients) {
-        this.nutrients = nutrients;
-    }
+//    private void setDescription(Description description) {
+//        this.description = description;
+//    }
+//
+//    private void setNutrients(Set<Nutrient> nutrients) {
+//        this.nutrients = nutrients;
+//    }
 
     public String getNdbno() {
         return ndbno;
     }
 
-    public Description getDescription() {
-        return description;
-    }
-
-    public Set<Nutrient> getNutrients() {
-        return nutrients;
-    }
+//    public Description getDescription() {
+//        return description;
+//    }
+//
+//    public Set<Nutrient> getNutrients() {
+//        return nutrients;
+//    }
 
     public static void add(Session session, Transaction transaction, String ndbno, Map<String, Object> desc, Set<Nutrient> nutrients ) {
 //        transaction.begin();

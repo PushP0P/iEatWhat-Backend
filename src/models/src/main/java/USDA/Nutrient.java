@@ -6,10 +6,10 @@ import java.util.Set;
 @Entity
 public class Nutrient {
     @Id
-    @ManyToMany
+//    @ManyToMany
     public String nutrient_number;
-    @OneToMany(mappedBy = "nutrient")
-    public Set<Measures> measures;
+//    @OneToMany(mappedBy = "nutrient")
+//    public Set<Measures> measures;
     @Column
     public String nutrientName;
     @Column
