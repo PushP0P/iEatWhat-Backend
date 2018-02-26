@@ -1,19 +1,22 @@
 package Workers;
 
-//import HibernateManager.HibernateUtil;
-//import Models.FoodItem;
+import DBManager.DBManager;
+import USDA.Description;
 import USDA.Report;
+
 import Utilities.HTTPSRequest;
 import Utilities.URLBuilders;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-//import org.hibernate.Session;
-//import org.hibernate.Transaction;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.hibernate.Session;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
 import javax.xml.parsers.ParserConfigurationException;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -38,18 +41,28 @@ public class FoodData {
         params.put("ndbno", ndbno);
         params.put("type", "f");
         params.put("format", "xml");
-        return HTTPSRequest.getXMLRequest(new URL(URLBuilders.buildBaseUSDAURL(USDAUrl, "V2/reports") + URLBuilders.getParamsString(params)));
+        Document report = HTTPSRequest.getXMLRequest(new URL(URLBuilders.buildBaseUSDAURL(USDAUrl, "V2/reports") + URLBuilders.getParamsString(params)));
+        report.getDocumentElement().normalize();
+        System.out.println("Node Name \n" + report.getDocumentElement().getNodeName());
+        return report;
     }
 
     private Report hashMapToReport(HashMap<String,String> USDAData) throws Exception {
-        System.out.printf(USDAData.toString());
+        System.out.println(USDAData.toString());
         return new Report();
     }
 
-    public static void updateDBWithReport(Map<String, Object> report) {
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-//        Transaction transaction = session.getTransaction();
-//
-//        FoodItem.add(session, transaction,"1234", "foo123142", "Test", "lorem ipsum" );
+    public static Description retrieveDescription(String ndbno) throws ParserConfigurationException, SAXException, IOException {
+        // test with desc
+        Session session = DBManager.getSession();
+        Description description = Description.findDescription(session, ndbno);
+        System.out.println("descNode \n" + om.writeValueAsString(description));
+        if (description != null) {
+            return description;
+        }
+        Document report = getFullReportUSDA(ndbno);
+        Node descNode = report.getDocumentElement().getElementsByTagName("desc").item(0);
+        Description.addOrUpdate(session, descNode);
+        return Description.findDescription(session, ndbno);
     }
 }

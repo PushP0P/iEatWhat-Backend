@@ -53,13 +53,30 @@ public class EventManager {
     }
 
     private static Response SearchEvent(Event evt) throws Exception {
-
         ObjectMapper om = new ObjectMapper();
-        String result = om.writeValueAsString(FoodSearch.getReport(evt.getPayload()));
-        return  new Response(
-                true,
-                "Search Results.",
-                result,
+        String type = evt.getType().split(":")[1];
+        switch (type) {
+            case"REPORT":
+                String result = om.writeValueAsString(FoodSearch.getReport(evt.getPayload()));
+                return  new Response(
+                        true,
+                        "Report Found",
+                        result,
+                        evt.getType()
+                );
+            case"DESCRIPTION":
+                String description = om.writeValueAsString(FoodSearch.getDescription(evt.getPayload()));
+                return  new Response(
+                        true,
+                        "Description Found",
+                        description,
+                        evt.getType()
+                );
+        }
+        return new Response(
+                false,
+                "Search Type Not Found: " + evt.getType(),
+                "No Body",
                 evt.getType()
         );
     }
