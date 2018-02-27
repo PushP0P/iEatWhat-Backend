@@ -193,8 +193,7 @@ public class Description {
     }
 
     public static Description findDescription(Session session, String ndbno) {
-        Description description = session.find(Description.class, ndbno);
-        return description;
+        return session.find(Description.class, ndbno);
     }
 
     public static void addOrUpdate(Session session, Node descNode) {

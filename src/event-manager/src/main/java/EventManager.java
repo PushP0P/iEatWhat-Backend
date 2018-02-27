@@ -1,4 +1,5 @@
 import SearchManager.FoodSearch;
+import Workers.FoodData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class EventManager {
@@ -70,6 +71,14 @@ public class EventManager {
                         true,
                         "Description Found",
                         description,
+                        evt.getType()
+                );
+            case"NUTRIENT":
+                FoodData.retrieveNutrient(evt.getPayload());
+                return  new Response(
+                        true,
+                        "Description Found",
+                        "Test Nutrient Search",
                         evt.getType()
                 );
         }

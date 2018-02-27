@@ -1,10 +1,11 @@
 package SearchManager;
 
 import Workers.FoodData;
+
 import USDA.Description;
+
 import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
+
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,8 +14,7 @@ import java.io.IOException;
 public class FoodSearch {
 
     public static Document getReport(String ndbno) throws Exception {
-        Document report = FoodData.getFullReportUSDA(ndbno);
-        return report;
+        return FoodData.getFullReportUSDA(ndbno);
     }
 
     public static Description getDescription(String ndbno) throws IOException, SAXException, ParserConfigurationException {
