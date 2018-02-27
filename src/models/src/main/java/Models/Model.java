@@ -11,13 +11,14 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Inheritance( strategy = InheritanceType.JOINED )
 public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
+    @Temporal(TemporalType.DATE)
     private Date createdOn;
-    @Column
+    @Temporal(TemporalType.DATE)
     private Date lastUpdated;
 
 

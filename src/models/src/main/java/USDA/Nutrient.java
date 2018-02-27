@@ -1,22 +1,36 @@
 package USDA;
 
-import javax.persistence.*;
-import java.util.Set;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-@Entity @Table(name="NUTRIENT")
+import javax.persistence.*;
+
+@Entity
 public class Nutrient {
     @Id
-    public String nutrient_number;
-    @ManyToOne
-    @JoinColumn(name = "report_id")
-    public Report report;
-    @OneToMany(mappedBy = "nutrient")
-    public Set<Measures> measures;
-    public String nutrientName;
-    public String listOfSourceId;
-    public String derived;
-    public String unit;
-    public String equivalent100g;
-    public String dataPointCount;
-    public String standardError;
+//    @ManyToOne
+    public String nutrient_id;
+    @Column
+    public String nutrient;
+
+    public Nutrient() {
+
+    }
+
+    public Nutrient(String nutrient_id, String nutrient) {
+        this.nutrient_id = nutrient_id;
+        this.nutrient = nutrient;
+    }
+
+    public static void addOrUpdate(Session session, String nutrient_id, String nutrientName) {
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        Nutrient nutrient = new Nutrient(nutrient_id, nutrientName);
+        session.saveOrUpdate(nutrient);
+        transaction.commit();
+    }
+
+    public static Nutrient retrieveById(Session session, String nutrient_id) {
+        return session.find(Nutrient.class, nutrient_id);
+    }
 }

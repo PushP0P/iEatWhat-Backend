@@ -1,106 +1,115 @@
 package Models;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import java.util.Collections;
+import java.util.Set;
+
+@Entity
 public class User {
-    private String id;
-    private String first_name;
-    private String last_name;
-    private String email;
-    private String password_hash;
-    private String google_refresh_token;
-    private String twitter_refresh_token;
-    private Settings settings;
-    private java.util.Date create_on;
-    private java.util.Date updated_last;
-    private Enum role;
-    private Review[] reviews;
+    @Id
+    private String id_token;
+    private Set<String> review_ids;
+    private Set<String> category_tags;
 
-    public void User(){
+    public void User() {
 
     }
 
-    public void User( String id, String first_name, String last_name, String email,
-                      String password_hash, String google_refresh_token, String twitter_refresh_token,
-                      Settings settings){
-
+    public User(String id_token, Set<String> review_ids, Set<String> category_tags) {
+        this.id_token = id_token;
+        this.review_ids = review_ids;
+        this.category_tags = category_tags;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getId_token() {
+        return id_token;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setId_token(String id_token) {
+        this.id_token = id_token;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public Set<String> getReview_ids() {
+        return review_ids;
     }
 
-    public void setGoogle_refresh_token(String google_refresh_token) {
-        this.google_refresh_token = google_refresh_token;
+    public void setReview_ids(Set<String> review_ids) {
+        this.review_ids = review_ids;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public Set<String> getCategory_tags() {
+        return category_tags;
     }
 
-    public void setPassword_hash(String password_hash) {
-        this.password_hash = password_hash;
+    public void setCategory_tags(Set<String> category_tags) {
+        this.category_tags = category_tags;
     }
 
-    public void setSettings(Settings settings) {
-        this.settings = settings;
+    public static void addOrUpdate(Session session, String id_token) {
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        Set<String> reviews = Collections.emptySet();
+        Set<String> categories = Collections.emptySet();
+        User user = new User(id_token, reviews, categories);
+        session.saveOrUpdate(user);
+        transaction.commit();
     }
 
-    public void setTwitter_refresh_token(String twitter_refresh_token) {
-        this.twitter_refresh_token = twitter_refresh_token;
+    public static void destroyUser(Session session, String id_token) {
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        User user = session.find(User.class, id_token);
+        session.remove(user);
+        transaction.commit();
     }
 
-    public Settings getSettings() {
-        return settings;
+    public static void insertReviewId(Session session, String id_token, String review_id) {
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        User user = session.find(User.class, id_token);
+        Set<String> review_ids = user.getReview_ids();
+        review_ids.add(review_id);
+        user.setReview_ids(review_ids);
+        session.save(user);
+        transaction.commit();
     }
 
-    public String getEmail() {
-        return email;
+    public static void removeReviewId(Session session, String id_token, String review_id) {
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        User user = session.find(User.class, id_token);
+        Set<String> review_ids = user.getReview_ids();
+        review_ids.remove(review_id);
+        user.setReview_ids(review_ids);
+        session.save(user);
+        transaction.commit();
     }
 
-    public void setUpdated_last(java.util.Date updated_last) {
-        this.updated_last = updated_last;
+    public static void removeCategoryTag(Session session, String id_token, String category_tag) {
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        User user = session.find(User.class, id_token);
+        Set<String> category_tags = user.getCategory_tags();
+        category_tags.remove(category_tag);
+        user.setReview_ids(category_tags);
+        session.save(user);
+        transaction.commit();
     }
 
-    public void setCreate_on(java.util.Date create_on) {
-        this.create_on = create_on;
+    public static void insertCategoryTag(Session session, String id_token, String category_tag) {
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        User user = session.find(User.class, id_token);
+        Set<String> category_tags = user.getCategory_tags();
+        category_tags.add(category_tag);
+        user.setReview_ids(category_tags);
+        session.save(user);
+        transaction.commit();
     }
 
-    public java.util.Date getUpdated_last() {
-        return updated_last;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public java.util.Date getCreate_on() {
-        return create_on;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public String getGoogle_refresh_token() {
-        return google_refresh_token;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public String getPassword_hash() {
-        return password_hash;
-    }
-
-    public String getTwitter_refresh_token() {
-        return twitter_refresh_token;
-    }
 }
