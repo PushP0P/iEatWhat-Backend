@@ -60,7 +60,7 @@ public class User {
         transaction.commit();
     }
 
-    public static void destroyUser(Session session, String id_token) {
+    public static void destroyByTokenId(Session session, String id_token) {
         Transaction transaction = session.getTransaction();
         transaction.begin();
         User user = session.find(User.class, id_token);

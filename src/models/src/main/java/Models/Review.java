@@ -1,89 +1,104 @@
 package Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Review extends Model {
-    @Column
+    @Id @GeneratedValue
+    private String review_id;
+    // todo Look up indexing and mapping relations
     private String author_id;
-    @Column
+    private String food_item_id;
     private String text;
-    @Column
-    private String topic;
-    @Column
-    private String container_id;
-    @Column
-    private String slug;
+    private int stars;
 
     public Review(){
 
     }
 
-    public Review( String author_id, String text,
-                         String topic, String container_id, String slug
-                         ) {
-            this.setAuthor_id(author_id);
-            this.setContainer_id(container_id);
-            this.setSlug(slug);
-            this.setText(text);
-            this.setTopic(topic);
-    }
-
-
-    @Override
-    public String toString() {
-        return "Review{" +
-                "author_id='" + author_id + '\'' +
-                ", text='" + text + '\'' +
-                ", topic='" + topic + '\'' +
-                ", container_id='" + container_id + '\'' +
-                ", slug='" + slug + '\'' +
-                '}';
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
-
-    public void setAuthor_id(String author_id) {
+    public Review( String author_id, String text, String food_item_id, int stars) {
         this.author_id = author_id;
-    }
-
-    public void setContainer_id(String container_id) {
-        this.container_id = container_id;
-    }
-
-    public void setText(String text) {
         this.text = text;
+        this.food_item_id = food_item_id;
+        this.stars = stars;
     }
 
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public Review(int uniqeID, String review_id, String author_id, String text, String food_item_id) {
+        super(uniqeID);
+        this.review_id = review_id;
+        this.author_id = author_id;
+        this.text = text;
+        this.food_item_id = food_item_id;
     }
 
-    public String getSlug() {
-        return slug;
+    public int getStars() {
+        return stars;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
+    }
+
+    public String getReview_id() {
+        return review_id;
+    }
+
+    public void setReview_id(String review_id) {
+        this.review_id = review_id;
     }
 
     public String getAuthor_id() {
         return author_id;
     }
 
-    public String getContainer_id() {
-        return container_id;
+    public void setAuthor_id(String author_id) {
+        this.author_id = author_id;
     }
 
     public String getText() {
         return text;
     }
 
-    public String getTopic() {
-        return topic;
-    }
-
-    public void updateComment(String text) {
+    public void setText(String text) {
         this.text = text;
     }
+
+    public String getFood_item_id() {
+        return food_item_id;
+    }
+
+    public void setFood_item_id(String food_item_id) {
+        this.food_item_id = food_item_id;
+    }
+
+    public static void addOrUpdate(Session session, String author_id, String text, String food_item_id, int stars) {
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        Review review = new Review(author_id, text, food_item_id, stars);
+        session.saveOrUpdate(review);
+        transaction.commit();
+    }
+
+    public static List<Review> findByFoodItemId(Session session, String food_item_id) {
+        Query query = session.createQuery("from Review where food_item_id = :food_item_id");
+        query.setParameter("food_item_id", food_item_id);
+        return query.getResultList();
+    }
+
+    public static int destroyByReviewId(Session session, String review_id) {
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        Query query = session.createQuery("delete Review where review_id = :review_id");
+        query.setParameter("review_id", review_id);
+        int result =  query.executeUpdate();
+        transaction.commit();
+        return result;
+    }
+
+
+
 }
