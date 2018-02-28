@@ -11,18 +11,16 @@
         <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
 
         <!-- Schema -->
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
         <!-- Production only! Remove when going live! Show queries created by hibernate in console -->
         <property name="show_sql">true</property>
 
         <!-- Map annotated entities -->
         <mapping class="Models.Model"/>
-        <mapping class="Models.FoodItem"/>
-        <mapping class="Models.Review"/>
-        <mapping class="Models.Category"/>
+        <mapping class="iEatWhat.IEW_User"/>
+        <mapping class="iEatWhat.Review"/>
         <mapping class="Models.Article"/>
-        <mapping class="Models.Settings"/>
         <mapping class="USDA.Description"/>
         <mapping class="USDA.Nutrient"/>
         <mapping class="USDA.Measures"/>

@@ -2,7 +2,6 @@ package Workers;
 
 import DBManager.DBManager;
 import USDA.Description;
-import USDA.Nutrient;
 import USDA.Report;
 
 import Utilities.HTTPSRequest;
@@ -17,8 +16,6 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -91,7 +88,7 @@ public class FoodData {
             name.normalize();
             System.out.println("Nutrient ID" + id.getNodeValue());
             System.out.println("Nutrient Name" + id.getNodeValue());
-//         Nutrient.addOrUpdate(session, nutrients.item(i).getOwnerDocument());
+//         Nutrient.add(session, nutrients.item(i).getOwnerDocument());
         }
     }
 
@@ -106,7 +103,7 @@ public class FoodData {
 //            return nutrient;
 //        }
 //
-//        Nutrient.addOrUpdate(session, descNode);
+//        Nutrient.add(session, descNode);
 //        return Nutrient.retrieveById(session, nutrient_id);
     }
 

@@ -21,7 +21,7 @@ public class DBManager {
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {
-        final ServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+        final ServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
         return new MetadataSources(registry).buildMetadata().buildSessionFactory();
     }
 

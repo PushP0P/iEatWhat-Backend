@@ -1,4 +1,4 @@
-package Models;
+package iEatWhat;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Review extends Model {
+public class Review {
     @Id @GeneratedValue
     private String review_id;
     // todo Look up indexing and mapping relations
@@ -20,19 +20,11 @@ public class Review extends Model {
 
     }
 
-    public Review( String author_id, String text, String food_item_id, int stars) {
+    public Review(String author_id, String text, String food_item_id, int stars) {
         this.author_id = author_id;
         this.text = text;
         this.food_item_id = food_item_id;
         this.stars = stars;
-    }
-
-    public Review(int uniqeID, String review_id, String author_id, String text, String food_item_id) {
-        super(uniqeID);
-        this.review_id = review_id;
-        this.author_id = author_id;
-        this.text = text;
-        this.food_item_id = food_item_id;
     }
 
     public int getStars() {
@@ -75,12 +67,13 @@ public class Review extends Model {
         this.food_item_id = food_item_id;
     }
 
-    public static void addOrUpdate(Session session, String author_id, String text, String food_item_id, int stars) {
+    public static String add(Session session, String author_id, String text, String food_item_id, int stars) {
         Transaction transaction = session.getTransaction();
         transaction.begin();
-        Review review = new Review(author_id, text, food_item_id, stars);
-        session.saveOrUpdate(review);
+        Review Review = new Review(author_id, text, food_item_id, stars);
+        String result = (String) session.save(Review);
         transaction.commit();
+        return  result;
     }
 
     public static List<Review> findByFoodItemId(Session session, String food_item_id) {
@@ -94,11 +87,18 @@ public class Review extends Model {
         transaction.begin();
         Query query = session.createQuery("delete Review where review_id = :review_id");
         query.setParameter("review_id", review_id);
-        int result =  query.executeUpdate();
+        int result = query.executeUpdate();
         transaction.commit();
         return result;
     }
 
-
-
+    public static void updateTextAndStars(Session session, String review_id, String text, int stars) {
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        Review review = session.find(Review.class, review_id);
+        review.setText(text);
+        review.setStars(stars);
+        session.update(review);
+        transaction.commit();
+    }
 }

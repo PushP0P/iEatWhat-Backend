@@ -1,8 +1,14 @@
 import SearchManager.FoodSearch;
+import UserManager.Users;
 import Workers.FoodData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 public class EventManager {
+    private static ObjectMapper om = new ObjectMapper();
     static void main(String... args) {
 
     }
@@ -15,6 +21,8 @@ public class EventManager {
         switch(domain) {
             case "SEARCH":
                 return SearchEvent(event);
+            case "USER":
+                return UserEvent(event);
             case "TEST":
                 // Write the return value to a string for transport in the response object.
                 return TestEvent(event);
@@ -54,7 +62,6 @@ public class EventManager {
     }
 
     private static Response SearchEvent(Event evt) throws Exception {
-        ObjectMapper om = new ObjectMapper();
         String type = evt.getType().split(":")[1];
         switch (type) {
             case"REPORT":
@@ -85,6 +92,27 @@ public class EventManager {
         return new Response(
                 false,
                 "Search Type Not Found: " + evt.getType(),
+                "No Body",
+                evt.getType()
+        );
+    }
+
+    private static Response UserEvent(Event evt) throws IOException {
+        String type = evt.getType().split(":")[1];
+        switch (type) {
+            case "NEW_USER":
+                HashMap payload = om.readValue(evt.getPayload(), HashMap.class);
+                String result = Users.newUser(payload);
+                return new Response(
+                        true,
+                        "IEW_User Created",
+                        result,
+                        evt.getType()
+                );
+        }
+        return new Response(
+                false,
+                "IEW_User Type Not Found: " + evt.getType(),
                 "No Body",
                 evt.getType()
         );
