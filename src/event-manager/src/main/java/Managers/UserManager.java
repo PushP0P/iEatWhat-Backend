@@ -19,10 +19,10 @@ public class UserManager {
                 String newUserResult = Users.newUser(payload);
                 if (newUserResult != null) {
                     return new Response(
-                            true,
-                            "IEW_User Created",
-                            newUserResult,
-                            evt.getType()
+                        true,
+                        "IEW_User Created",
+                        newUserResult,
+                        evt.getType()
                     );
                 }
                 return new Response(
@@ -33,13 +33,12 @@ public class UserManager {
                 );
             case "UPDATE_USER":
                 int updateUserResult = Users.updateUser(payload);
-                if(updateUserResult == 1) {
+                if (updateUserResult == 1) {
                     return new Response(
-                            true,
-                            "IEW_User Updated",
-                            1,
-                            evt.getType());
-
+                        true,
+                        "IEW_User Updated",
+                        1,
+                        evt.getType());
                 }
                 return new Response(
                         false,
@@ -47,7 +46,7 @@ public class UserManager {
                         "No Body",
                         evt.getType()
                 );
-            case"REMOVE_USER":
+            case "REMOVE_USER":
                 String removeUserResult = Users.removeUser(payload);
                 return new Response(
                         true,
@@ -55,7 +54,7 @@ public class UserManager {
                         removeUserResult,
                         evt.getType()
                 );
-            case"UPDATE_REVIEW":
+            case "UPDATE_REVIEW":
                 Object updateReviewResult = Users.updateReview(payload);
                 return new Response(
                         true,
@@ -63,14 +62,14 @@ public class UserManager {
                         updateReviewResult,
                         evt.getType()
                 );
-            case"NEW_REVIEW":
+            case "NEW_REVIEW":
                 Object newReviewResult = Users.newReview(payload);
                 if (newReviewResult != null) {
                     return new Response(
-                            true,
-                            "Review Created",
-                            newReviewResult,
-                            evt.getType()
+                        true,
+                        "Review Created",
+                        newReviewResult,
+                        evt.getType()
                     );
                 }
                 return new Response(
@@ -79,21 +78,21 @@ public class UserManager {
                         "No Body",
                         evt.getType()
                 );
-            case"REMOVE_REVIEW":
+            case "REMOVE_REVIEW":
                 int removeReviewResult = Users.removeReview(payload);
                 if (removeReviewResult != -1) {
                     return new Response(
-                            true,
-                            "Review Created",
-                            removeReviewResult,
-                            evt.getType()
+                        true,
+                        "Review Created",
+                        removeReviewResult,
+                        evt.getType()
                     );
                 }
                 return new Response(
-                        false,
-                        "Review could not be created.",
-                        "No Body",
-                        evt.getType()
+                    false,
+                    "Review could not be created.",
+                    "No Body",
+                    evt.getType()
                 );
         }
         return new Response(
