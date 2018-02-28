@@ -1,4 +1,4 @@
-package UserManager;
+package Workers;
 
 import DBManager.DBManager;
 
@@ -9,7 +9,6 @@ import org.hibernate.Session;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 public class Users {
@@ -18,27 +17,40 @@ public class Users {
         Session session = DBManager.getSession();
         Set<String> reviews = Collections.emptySet();
         Set<String> categories = Collections.emptySet();
-        return IEW_User.add(session, payload.get("idToken").toString(), reviews, categories);
+        boolean hasTwitter = (boolean) payload.get("hasTwitter");
+        boolean hasGoogle = (boolean) payload.get("hasGoogle");
+        boolean hasLocal = (boolean) payload.get("hasLocal");
+        return IEW_User.add(session, payload.get("idToken").toString(), reviews, categories, hasTwitter, hasGoogle, hasLocal);
     }
 
-    public static void removeUser(Map<String, String> payload) {
+    public static int updateUser(HashMap payload) {
         Session session = DBManager.getSession();
-        String idToken = payload.get("idToken");
-        IEW_User.destroyByTokenId(session, idToken);
+        String idToken = (String) payload.get("idToken");
+        boolean hasTwitter = (boolean) payload.get("hasTwitter");
+        boolean hasGoogle = (boolean) payload.get("hasGoogle");
+        boolean hasLocal = (boolean) payload.get("hasLocal");
+        return IEW_User.update(session, idToken, hasTwitter, hasGoogle, hasLocal);
     }
 
-    public static String newReview(Map<String, Object> payload) {
+    public static String removeUser(HashMap payload) {
+        Session session = DBManager.getSession();
+        String idToken = (String) payload.get("idToken");
+        IEW_User.destroyByTokenId(session, idToken);
+        return idToken;
+    }
+
+    public static Object newReview(HashMap payload) {
         Session session = DBManager.getSession();
         String idToken = (String) payload.get("idToken");
         String reviewText = (String) payload.get("text");
         int stars = (int) payload.get("stars");
         String foodItemNDBNo = (String) payload.get("ndbo");
-        String reviewId = (String) Review.add(session, idToken, reviewText, foodItemNDBNo, stars);
+        String reviewId = Review.add(session, idToken, reviewText, foodItemNDBNo, stars);
         IEW_User.insertReviewId(session, idToken, reviewId);
         return reviewId;
     }
 
-    public static int updateReview(Map<String, Object> payload) {
+    public static Object updateReview(HashMap payload) {
         Session session = DBManager.getSession();
         String idToken = (String) payload.get("idToken");
         IEW_User user = IEW_User.getUser(session, idToken);
@@ -47,12 +59,12 @@ public class Users {
             String reviewText = (String) payload.get("text");
             int stars = (int) payload.get("stars");
             Review.updateTextAndStars(session, reviewId, reviewText, stars);
-            return 1;
+            return reviewId;
         }
         return -1;
     }
 
-    public static int removeReview(Map<String, String> payload) {
+    public static int removeReview(HashMap payload) {
         Session session = DBManager.getSession();
         String idToken = (String) payload.get("idToken");
         String reviewId = (String) payload.get("reviewId");

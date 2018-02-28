@@ -1,4 +1,4 @@
-package SearchManager;
+package Workers;
 
 import Workers.FoodData;
 

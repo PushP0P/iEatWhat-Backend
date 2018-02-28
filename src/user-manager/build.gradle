@@ -1,6 +1,0 @@
-apply plugin : 'java'
-
-dependencies {
-    compile project(':src:db-manager')
-    compile project(':src:models')
-}
