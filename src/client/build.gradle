@@ -15,7 +15,7 @@ task cloneClient {
         }
         org.ajoberstar.grgit.Grgit.clone(
                 dir: 'src/client/repo',
-                uri: 'git@github.com:PushP0P/iEatWhat-Client.git'
+                uri: 'git@github.com:PushP0P/iEatWhatModels-Client.git'
         )
         copy {
             println 'Copy repo config'

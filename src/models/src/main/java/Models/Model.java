@@ -1,6 +1,6 @@
 /*****************************************************
  * Date: 2/16/2018
- * iEatWhat-Backend
+ * iEatWhatModels-Backend
  * Summary: This class, model, will serve as a base
  * class for the model, something which other models
  * can inherit from.
