@@ -1,4 +1,4 @@
-package iEatWhat;
+package iEatWhatModels;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,17 +12,17 @@ import java.util.Set;
 @Entity
 public class IEW_User {
     @Id
-    public String id_token;
+    private String id_token;
     @ElementCollection
-    public Set<String> category_tags;
+    private Set<String> category_tags;
     @ElementCollection
-    public Set<String> review_ids;
+    private Set<String> review_ids;
     @Column
-    public boolean hasTwitter;
+    private boolean hasTwitter;
     @Column
-    public boolean hasGoogle;
+    private boolean hasGoogle;
     @Column
-    public boolean hasLocal;
+    private boolean hasLocal;
 
     public IEW_User() {}
 

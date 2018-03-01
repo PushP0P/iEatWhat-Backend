@@ -20,14 +20,14 @@ public class UserManager {
                 if (newUserResult != null) {
                     return new Response(
                         true,
-                        "IEW_User Created",
+                        "User Created",
                         newUserResult,
                         evt.getType()
                     );
                 }
                 return new Response(
                         false,
-                        "IEW_User could not be created.",
+                        "User could not be created.",
                         "No Body",
                         evt.getType()
                 );
@@ -36,30 +36,36 @@ public class UserManager {
                 if (updateUserResult == 1) {
                     return new Response(
                         true,
-                        "IEW_User Updated",
+                        "User Updated",
                         1,
                         evt.getType());
                 }
                 return new Response(
                         false,
-                        "IEW_User could not be updated.",
+                        "User could not be updated.",
                         "No Body",
                         evt.getType()
                 );
+            case "GET_USER":
+                return new Response(
+                    true,
+                    "User Updated",
+                    Users.getUser(payload),
+                    evt.getType());
             case "REMOVE_USER":
-                String removeUserResult = Users.removeUser(payload);
+                int removeUserResult = Users.removeUser(payload);
+                if (removeUserResult == 1) {
+                    return new Response(
+                            true,
+                            "User Removed",
+                            removeUserResult,
+                            evt.getType()
+                    );
+                }
                 return new Response(
-                        true,
-                        "IEW_User Removed",
+                        false,
+                        "Could not remove User.",
                         removeUserResult,
-                        evt.getType()
-                );
-            case "UPDATE_REVIEW":
-                Object updateReviewResult = Users.updateReview(payload);
-                return new Response(
-                        true,
-                        "Review Updated",
-                        updateReviewResult,
                         evt.getType()
                 );
             case "NEW_REVIEW":
@@ -78,6 +84,14 @@ public class UserManager {
                         "No Body",
                         evt.getType()
                 );
+            case "UPDATE_REVIEW":
+                Object updateReviewResult = Users.updateReview(payload);
+                return new Response(
+                        true,
+                        "Review Updated",
+                        updateReviewResult,
+                        evt.getType()
+                );
             case "REMOVE_REVIEW":
                 int removeReviewResult = Users.removeReview(payload);
                 if (removeReviewResult != -1) {
@@ -94,10 +108,42 @@ public class UserManager {
                     "No Body",
                     evt.getType()
                 );
+            case "ADD_CATEGORY":
+                int addCategoryResult = Users.addCategory(payload);
+                if (addCategoryResult == 1) {
+                    return new Response(
+                            true,
+                            "Category added.",
+                            addCategoryResult,
+                            evt.getType()
+                    );
+                }
+                return new Response(
+                        false,
+                        "Category could not be added.",
+                        "No Body",
+                        evt.getType()
+                );
+            case "REMOVE_CATEGORY":
+                int removeCategoryResult = Users.removeCategory(payload);
+                if (removeCategoryResult == 1) {
+                    return new Response(
+                            true,
+                            "Category removed.",
+                            removeCategoryResult,
+                            evt.getType()
+                    );
+                }
+                return new Response(
+                        false,
+                        "Category could not be removed.",
+                        "No Body",
+                        evt.getType()
+                );
         }
         return new Response(
                 false,
-                "IEW_User Type Not Found: " + evt.getType(),
+                "User Type Not Found: " + evt.getType(),
                 "No Body",
                 evt.getType()
         );

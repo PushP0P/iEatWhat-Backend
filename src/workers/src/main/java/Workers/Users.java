@@ -2,7 +2,7 @@ package Workers;
 
 import DBManager.DBManager;
 
-import iEatWhat.IEW_User;
+import iEatWhatModels.IEW_User;
 import iEatWhat.Review;
 
 import org.hibernate.Session;
@@ -32,11 +32,10 @@ public class Users {
         return IEW_User.update(session, idToken, hasTwitter, hasGoogle, hasLocal);
     }
 
-    public static String removeUser(HashMap payload) {
+    public static int removeUser(HashMap payload) {
         Session session = DBManager.getSession();
         String idToken = (String) payload.get("idToken");
-        IEW_User.destroyByTokenId(session, idToken);
-        return idToken;
+        return IEW_User.destroyByTokenId(session, idToken);
     }
 
     public static Object newReview(HashMap payload) {
@@ -55,7 +54,7 @@ public class Users {
         String idToken = (String) payload.get("idToken");
         IEW_User user = IEW_User.getUser(session, idToken);
         String reviewId = (String) payload.get("reviewId");
-        if (user.review_ids.contains(reviewId)) {
+        if (user.getReview_ids().contains(reviewId)) {
             String reviewText = (String) payload.get("text");
             int stars = (int) payload.get("stars");
             Review.updateTextAndStars(session, reviewId, reviewText, stars);
@@ -75,5 +74,23 @@ public class Users {
         return result;
     }
 
+    public static int addCategory(HashMap payload) {
+        Session session = DBManager.getSession();
+        String idToken = (String) payload.get("idToken");
+        String CategoryTag = (String) payload.get("CategoryTag");
+        return IEW_User.insertCategoryTag(session, idToken, CategoryTag);
+    }
 
+    public static int removeCategory(HashMap payload) {
+        Session session = DBManager.getSession();
+        String idToken = (String) payload.get("idToken");
+        String CategoryTag = (String) payload.get("CategoryTag");
+        return IEW_User.removeCategoryTag(session, idToken, CategoryTag);
+    }
+
+    public static IEW_User getUser(HashMap payload) {
+        String idToken = (String) payload.get("idToken");
+        Session session = DBManager.getSession();
+        return session.find(IEW_User.class, idToken);
+    }
 }
