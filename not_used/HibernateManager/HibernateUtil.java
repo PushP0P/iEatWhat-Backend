@@ -10,7 +10,7 @@ import USDA.Measures;
 import USDA.Nutrient;
 import USDA.Report;
 
-import iEatWhat.IEW_User;
+import iEatWhatModels.IEW_User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;

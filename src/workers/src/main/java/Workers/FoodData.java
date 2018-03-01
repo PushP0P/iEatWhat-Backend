@@ -88,23 +88,12 @@ public class FoodData {
             name.normalize();
             System.out.println("Nutrient ID" + id.getNodeValue());
             System.out.println("Nutrient Name" + id.getNodeValue());
-//         Nutrient.add(session, nutrients.item(i).getOwnerDocument());
         }
     }
 
     public static void retrieveNutrient(String nutrient_id) throws ParserConfigurationException, SAXException, IOException {
-
+        // Todo
         updateNutrientList();
-
-//        Session session = DBManager.getSession();
-//        Nutrient nutrient = Nutrient.retrieveById(session, nutrient_id);
-//        System.out.println("nutrientNode \n" + om.writeValueAsString(nutrient));
-//        if (nutrient != null) {
-//            return nutrient;
-//        }
-//
-//        Nutrient.add(session, descNode);
-//        return Nutrient.retrieveById(session, nutrient_id);
     }
 
 }
