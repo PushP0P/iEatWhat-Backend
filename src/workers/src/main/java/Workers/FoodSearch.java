@@ -1,4 +1,4 @@
-package SearchManager;
+package Workers;
 
 import Workers.FoodData;
 
@@ -29,7 +29,7 @@ public class FoodSearch {
 //                System.out.println(i.());
 //                }
 //
-//                Review review = new Review("Rock", "Bar", "Bas", "Bat", "Metal");
-//                DBManager.insert(review);
-//                review.setAuthor_id("New Author");
-//                DBManager.insert(review);
+//                Review Review = new Review("Rock", "Bar", "Bas", "Bat", "Metal");
+//                DBManager.insert(Review);
+//                Review.setAuthor_id("New Author");
+//                DBManager.insert(Review);

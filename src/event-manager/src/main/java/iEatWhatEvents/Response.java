@@ -1,17 +1,19 @@
+package iEatWhatEvents;
+
 public class Response {
     private boolean ok;
     private String eventType;
-    private String body;
+    private Object body;
     private String message;
 
-    public Response(boolean ok, String message, String body, String eventType) {
+    public Response(boolean ok, String message, Object body, String eventType) {
         this.setOk(ok);
         this.setMessage(message);
         this.setBody(body);
         this.setEvent(eventType);
     }
 
-    public void setBody(String body) {
+    public void setBody(Object body) {
         this.body = body;
     }
 
@@ -31,7 +33,7 @@ public class Response {
         return this.eventType;
     }
 
-    public String getBody() {
+    public Object getBody() {
         return body;
     }
 

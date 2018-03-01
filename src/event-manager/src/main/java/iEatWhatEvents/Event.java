@@ -1,3 +1,5 @@
+package iEatWhatEvents;
+
 public class Event {
     private String type;
     private String payload;

@@ -1,3 +1,5 @@
+package Managers;
+
 public class FakeManager {
     // Managers initialize..
     public FakeManager(){

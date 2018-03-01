@@ -4,7 +4,6 @@ import USDA.Report;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
@@ -12,7 +11,6 @@ import Models.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.sql.*;
 import java.util.List;
 
 
@@ -21,7 +19,7 @@ public class DBManager {
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {
-        final ServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+        final ServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
         return new MetadataSources(registry).buildMetadata().buildSessionFactory();
     }
 

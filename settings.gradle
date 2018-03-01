@@ -3,8 +3,6 @@ include 'src:models',
         'src:api',
         'src:event-manager',
         'src:db-manager',
-        'src:workers',
-        'src:search-manager'
-
+        'src:workers'
 // need to exclude for prod push
 //include 'src:client'

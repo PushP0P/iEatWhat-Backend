@@ -1,5 +1,6 @@
-import Models.Article;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import iEatWhatEvents.Event;
+import iEatWhatEvents.EventHandler;
 import ratpack.exec.Promise;
 import ratpack.form.Form;
 import ratpack.handling.Handler;
@@ -26,12 +27,12 @@ public class API {
 
                 // System.out.println("Form Data? \n\n" + f.getAll());
 
-                // if the form data is not an Event Object
+                // if the form data is not an iEatWhatEvents.Event Object
                 if (f.get("type") == null){
                     ctx.render("{\"message\": \"No Body\"}");
                 } else {
                     Event evt = new Event(f.get("type"), f.get("payload"));
-                    String response = this.om.writeValueAsString(EventManager.dispatchEvent(evt));
+                    String response = this.om.writeValueAsString(EventHandler.dispatchEvent(evt));
                     ctx.render(response);
                 }
             });

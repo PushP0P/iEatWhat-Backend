@@ -10,6 +10,7 @@ import USDA.Measures;
 import USDA.Nutrient;
 import USDA.Report;
 
+import iEatWhatModels.IEW_User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -36,10 +37,9 @@ public class HibernateUtil {
                 settings.put(Environment.DRIVER, "org.postgresql.Driver");
                 settings.put(Environment.URL, "jdbc:postgresql://127.0.0.1:5432/testdb");
                 settings.put(Environment.JPA_JDBC_URL, "jdbc:postgresql://127.0.0.1:5432/testdb");
-
 //                settings.put(Environment.USER, "root");
 //                settings.put(Environment.PASS, "admin");
-                settings.put(Environment.HBM2DDL_AUTO, "update");
+                settings.put(Environment.HBM2DDL_AUTO, "create");
                 settings.put(Environment.SHOW_SQL, true);
 
                 // HikariCP settings
@@ -56,10 +56,8 @@ public class HibernateUtil {
                 registryBuilder.applySettings(settings);
                 registry = registryBuilder.build();
                 MetadataSources sources = new MetadataSources(registry)
-                        .addAnnotatedClass(FoodItem.class)
+                        .addAnnotatedClass(IEW_User.class)
                         .addAnnotatedClass(Model.class)
-                        .addAnnotatedClass(Category.class)
-                        .addAnnotatedClass(Review.class)
                         .addAnnotatedClass(Report.class)
                         .addAnnotatedClass(Measures.class)
                         .addAnnotatedClass(Description.class)
