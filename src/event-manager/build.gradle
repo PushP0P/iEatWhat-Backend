@@ -2,5 +2,7 @@ apply plugin : 'java'
 apply plugin : 'io.ratpack.ratpack-groovy'
 
 dependencies {
+    compile project(":src:db-manager")
+    compile project(":src:workers")
     compile "io.reactivex.rxjava2:rxjava:2.1.9"
 }

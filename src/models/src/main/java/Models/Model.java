@@ -1,6 +1,6 @@
 /*****************************************************
  * Date: 2/16/2018
- * iEatWhat-Backend
+ * iEatWhatModels-Backend
  * Summary: This class, model, will serve as a base
  * class for the model, something which other models
  * can inherit from.
@@ -11,13 +11,14 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Inheritance( strategy = InheritanceType.JOINED )
 public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
+    @Temporal(TemporalType.DATE)
     private Date createdOn;
-    @Column
+    @Temporal(TemporalType.DATE)
     private Date lastUpdated;
 
 
