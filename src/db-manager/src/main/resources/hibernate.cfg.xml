@@ -18,17 +18,9 @@
 
         <!-- Map annotated entities -->
         <mapping class="Models.Model"/>
-<<<<<<< HEAD
-        <mapping class="iEatWhat.IEW_User"/>
-        <mapping class="iEatWhat.Review"/>
-        <mapping class="Models.Article"/>
-=======
-        <mapping class="Models.FoodItem"/>
-        <mapping class="Models.Review"/>
-        <mapping class="Models.Category"/>
-        <mapping class="Models.Article"/>
-        <mapping class="Models.Settings"/>
->>>>>>> fb2e10d03298c9bf28dfcbbb09e1cfa7b2c9cf98
+        <mapping class="iEatWhatModels.FoodItem"/>
+        <mapping class="iEatWhatModels.Review"/>
+        <mapping class="iEatWhatModels.Category"/>
         <mapping class="USDA.Description"/>
         <mapping class="USDA.Nutrient"/>
         <mapping class="USDA.Measures"/>

@@ -9,13 +9,13 @@
 //    public Article(){}
 //
 //    public Article(String id, String title, String blurb, ArticleSection... articleSections) {
-//        setId(id);
+//        setDescription_ndbno(id);
 //        setTitle(title);
 //        setBlurb(blurb);
 //        setSections(articleSections);
 //    }
 //
-//    public String getId() {
+//    public String getDescription_ndbno() {
 //        return id;
 //    }
 //
@@ -31,7 +31,7 @@
 //        return sections;
 //    }
 //
-//    private void setId(String id) {
+//    private void setDescription_ndbno(String id) {
 //        this.id = id;
 //    }
 //

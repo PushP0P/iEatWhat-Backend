@@ -3,7 +3,7 @@ package Workers;
 import DBManager.DBManager;
 
 import iEatWhatModels.IEW_User;
-import iEatWhat.Review;
+import iEatWhatModels.Review;
 
 import org.hibernate.Session;
 

@@ -13,6 +13,24 @@ task cloneClient {
         if (file('./repo').exists()) {
             delete './repo'
         }
+
+        if (file('./*').length() > 1) {
+            delete '.gradle'
+            delete 'build'
+            delete 'repo'
+            delete 'node_modules'
+            delete 'src'
+            delete 'public'
+            delete 'developer-resources'
+            delete 'client-build'
+            delete 'package.json'
+            delete 'README.md'
+            delete 'tsconfig.json'
+            delete 'tsconfig.test.jsonn'
+            delete 'tslint.json'
+            delete 'yarn.lock'
+            delete 'tsconfig.test.json'
+        }
         org.ajoberstar.grgit.Grgit.clone(
                 dir: 'src/client/repo',
                 uri: 'git@github.com:PushP0P/iEatWhat-Client.git'

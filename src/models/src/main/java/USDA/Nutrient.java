@@ -9,28 +9,51 @@ import javax.persistence.*;
 public class Nutrient {
     @Id
 //    @ManyToOne
-    public String nutrient_id;
+    private String nutrient_id;
     @Column
-    public String nutrient;
+    private String derivation;
+    private int dp;
+    private String group;
+    private String measures;
+    private String name;
+    private String se;
+    private String sourcecode;
+    private String unit;
+    private float value;
 
     public Nutrient() {
 
     }
 
-    public Nutrient(String nutrient_id, String nutrient) {
+    public Nutrient(String nutrient_id, String derivation,
+                    int dp, String group, String measures, String name,
+                    String se, String sourcecode,
+                    String unit, float value) {
         this.nutrient_id = nutrient_id;
-        this.nutrient = nutrient;
+        this.derivation = derivation;
+        this.dp = dp;
+        this.group = group;
+        this.measures = measures;
+        this.name = name;
+        this.se = se;
+        this.sourcecode = sourcecode;
+        this.unit = unit;
+        this.value = value;
     }
 
-    public static void addOrUpdate(Session session, String nutrient_id, String nutrientName) {
+    public static Nutrient addOrUpdate(Session session, String nutrient_id, String derivation,
+                                       int dp, String group, String measures, String name,
+                                       String se, String sourcecode,
+                                       String unit, float value) {
         Transaction transaction = session.getTransaction();
         transaction.begin();
-        Nutrient nutrient = new Nutrient(nutrient_id, nutrientName);
+        Nutrient nutrient = new Nutrient(nutrient_id,  derivation, dp,  group,  measures,  name,  se,  sourcecode, unit,  value);
         session.saveOrUpdate(nutrient);
         transaction.commit();
+        return nutrient;
     }
 
-    public static Nutrient retrieveById(Session session, String nutrient_id) {
+    public static Nutrient retrieveById(Session session, String nutrient_id) throws NoResultException {
         return session.find(Nutrient.class, nutrient_id);
     }
 }

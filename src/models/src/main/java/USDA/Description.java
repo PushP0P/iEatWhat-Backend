@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Description {
     @Id
-    public String ndbno;
+    public String description_ndbno;
     //    @OneToOne
 //    @JoinColumn(name = "report_id")
 //    public Report report;
@@ -48,8 +48,8 @@ public class Description {
     public Description() {
     }
 
-    public Description(String ndbno, String name, String sd, String fg, String sn, String cn, String manu, float nf, float cf, float ff, float pf, String r, String rd, String ds, String ru) {
-        this.ndbno = ndbno;
+    public Description(String description_ndbno, String name, String sd, String fg, String sn, String cn, String manu, float nf, float cf, float ff, float pf, String r, String rd, String ds, String ru) {
+        this.description_ndbno = description_ndbno;
         this.name = name;
         this.sd = sd;
         this.fg = fg;
@@ -65,126 +65,126 @@ public class Description {
         this.ds = ds;
         this.ru = ru;
     }
-//
-//    public String getNdbno() {
-//        return ndbno;
-//    }
-//
-//    private void setNdbno(String ndbno) {
-//        this.ndbno = ndbno;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    private void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public String getSd() {
-//        return sd;
-//    }
-//
-//    private void setSd(String sd) {
-//        this.sd = sd;
-//    }
-//
-//    public String getGroup() {
-//        return fg;
-//    }
-//
-//    private void setGroup(String fg) {
-//        this.fg = fg;
-//    }
-//
-//    public String getSn() {
-//        return sn;
-//    }
-//
-//    private void setSn(String sn) {
-//        this.sn = sn;
-//    }
-//
-//    public String getCn() {
-//        return cn;
-//    }
-//
-//    private void setCn(String cn) {
-//        this.cn = cn;
-//    }
-//
-//    public String getManu() {
-//        return manu;
-//    }
-//
-//    private void setManu(String manu) {
-//        this.manu = manu;
-//    }
-//
-//    public float getNf() {
-//        return nf;
-//    }
-//
-//    private void setNf(float nf) {
-//        this.nf = nf;
-//    }
-//
-//    public float getCf() {
-//        return cf;
-//    }
-//
-//    private void setCf(float cf) {
-//        this.cf = cf;
-//    }
-//
-//    public float getFf() {
-//        return ff;
-//    }
-//
-//    private void setFf(float ff) {
-//        this.ff = ff;
-//    }
-//
-//    public float getPf() {
-//        return pf;
-//    }
-//
-//    private void setPf(float pf) {
-//        this.pf = pf;
-//    }
-//
-//    public String getR() {
-//        return r;
-//    }
-//
-//    private void setR(String r) {
-//        this.r = r;
-//    }
-//
-//    public String getRd() {
-//        return rd;
-//    }
-//
-//    private void setRd(String rd) {
-//        this.rd = rd;
-//    }
-//
-//    public String getDs() {
-//        return ds;
-//    }
-//
-//    private void setDs(String ds) {
-//        this.ds = ds;
-//    }
-//
-//    public String getRu() {
-//        return ru;
-//    }
-//
-//    private void setRu(String ru) {
-//        this.ru = ru;
-//    }
+
+    public String getDescription_ndbno() {
+        return description_ndbno;
+    }
+
+    public void setDescription_ndbno(String description_ndbno) {
+        this.description_ndbno = description_ndbno;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSd() {
+        return sd;
+    }
+
+    public void setSd(String sd) {
+        this.sd = sd;
+    }
+
+    public String getFg() {
+        return fg;
+    }
+
+    public void setFg(String fg) {
+        this.fg = fg;
+    }
+
+    public String getSn() {
+        return sn;
+    }
+
+    public void setSn(String sn) {
+        this.sn = sn;
+    }
+
+    public String getCn() {
+        return cn;
+    }
+
+    public void setCn(String cn) {
+        this.cn = cn;
+    }
+
+    public String getManu() {
+        return manu;
+    }
+
+    public void setManu(String manu) {
+        this.manu = manu;
+    }
+
+    public float getNf() {
+        return nf;
+    }
+
+    public void setNf(float nf) {
+        this.nf = nf;
+    }
+
+    public float getCf() {
+        return cf;
+    }
+
+    public void setCf(float cf) {
+        this.cf = cf;
+    }
+
+    public float getFf() {
+        return ff;
+    }
+
+    public void setFf(float ff) {
+        this.ff = ff;
+    }
+
+    public float getPf() {
+        return pf;
+    }
+
+    public void setPf(float pf) {
+        this.pf = pf;
+    }
+
+    public String getR() {
+        return r;
+    }
+
+    public void setR(String r) {
+        this.r = r;
+    }
+
+    public String getRd() {
+        return rd;
+    }
+
+    public void setRd(String rd) {
+        this.rd = rd;
+    }
+
+    public String getDs() {
+        return ds;
+    }
+
+    public void setDs(String ds) {
+        this.ds = ds;
+    }
+
+    public String getRu() {
+        return ru;
+    }
+
+    public void setRu(String ru) {
+        this.ru = ru;
+    }
 
     public static List<Description> retrieveAll(Session session) {
         Query query = session.createQuery("select d from Description d", Description.class);
@@ -198,7 +198,7 @@ public class Description {
 
     public static void addOrUpdate(Session session, Node descNode) {
         // Set values from the XMLNode
-        String ndbno = descNode.getAttributes().getNamedItem("ndbno").getNodeValue();
+        String ndbno = descNode.getAttributes().getNamedItem("description_ndbno").getNodeValue();
         String name = descNode.getAttributes().getNamedItem("name").getNodeValue();
         String sd = descNode.getAttributes().getNamedItem("sd").getNodeValue();
         String group = descNode.getAttributes().getNamedItem("fg").getNodeValue();
