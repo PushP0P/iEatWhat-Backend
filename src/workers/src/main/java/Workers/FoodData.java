@@ -166,17 +166,17 @@ public class FoodData {
 
     public static void addNutrientsFromList(Session session, List<Node> nutrients) {
         for (Node nutrient : nutrients) {
-            String nutrient_id = ((Element) nutrient.getChildNodes().item(0)).getElementsByTagName("nutrient_id").item(0).getTextContent();
-            String derivation = ((Element) nutrient.getChildNodes().item(0)).getElementsByTagName("derivation").item(0).getTextContent();
-            int dp = Integer.parseInt(((Element) nutrient.getChildNodes().item(0)).getElementsByTagName("dp").item(0).getTextContent());
-            String group = ((Element) nutrient.getChildNodes().item(0)).getElementsByTagName("group").item(0).getTextContent();
-            String measures = ((Element) nutrient.getChildNodes().item(0)).getElementsByTagName("measures").item(0).getTextContent();
-            String name = ((Element) nutrient.getChildNodes().item(0)).getElementsByTagName("name").item(0).getTextContent();
-            String se = ((Element) nutrient.getChildNodes().item(0)).getElementsByTagName("se").item(0).getTextContent();
-            String sourcecode = ((Element) nutrient.getChildNodes().item(0)).getElementsByTagName("sourcecode").item(0).getTextContent();
-            String unit = ((Element) nutrient.getChildNodes().item(0)).getElementsByTagName("unit").item(0).getTextContent();
-            float value = Float.parseFloat(((Element) nutrient.getChildNodes().item(0)).getElementsByTagName("value").item(0).getTextContent());
-            Nutrient.addOrUpdate(session, nutrient_id, derivation, dp, group, measures, name, se, sourcecode, unit, value);
+            String nutrient_id = ((Element) nutrient).getElementsByTagName("nutrient_id").item(0).getTextContent();
+            String derivation = ((Element) nutrient).getElementsByTagName("derivation").item(0).getTextContent();
+            String group = ((Element) nutrient).getElementsByTagName("group").item(0).getTextContent();
+            String measures = ((Element) nutrient).getElementsByTagName("measures").item(0).getTextContent();
+            String name = ((Element) nutrient).getElementsByTagName("name").item(0).getTextContent();
+            String se = ((Element) nutrient).getElementsByTagName("se").item(0).getTextContent();
+            String sourcecode = ((Element) nutrient).getElementsByTagName("sourcecode").item(0).getTextContent();
+            String unit = ((Element) nutrient).getElementsByTagName("unit").item(0).getTextContent();
+            int dp = Integer.parseInt(((Element) nutrient).getElementsByTagName("dp").item(0).getTextContent();
+            float value = Float.parseFloat(((Element) nutrient).getElementsByTagName("value").item(0).getTextContent());
+            Nutrient.addOrUpdate(session, nutrient_id, derivation, dp,  group,  measures,  name,  se,  sourcecode, unit,  value);
         }
 
     }
