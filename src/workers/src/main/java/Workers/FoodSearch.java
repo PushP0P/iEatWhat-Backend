@@ -4,6 +4,7 @@ import DBManager.DBManager;
 
 import USDA.Description;
 
+import USDA.Nutrient;
 import USDA.Report;
 import iEatWhatModels.SearchTermResult;
 import org.hibernate.Session;
@@ -13,6 +14,7 @@ import org.xml.sax.SAXException;
 import javax.persistence.NoResultException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.Set;
 
 public class FoodSearch {
 
@@ -33,9 +35,13 @@ public class FoodSearch {
             return FoodData.searchFoodUSDA(searchTerms);
         }
     }
+
+    public static Set<Nutrient> getNutrientList() throws ParserConfigurationException, SAXException, IOException {
+        return (Set<Nutrient>) FoodData.getNutrientListUSDA();
+
+    }
 }
 
-//
 //    List<Model> reviews = DBManager.find(new Review());
 //        for (Model i: reviews) {
 //                System.out.println(i.());

@@ -6,6 +6,7 @@ import iEatWhatEvents.Event;
 import iEatWhatEvents.Response;
 
 import java.io.IOException;
+
 import java.util.HashMap;
 
 public class UserManager {

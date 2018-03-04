@@ -1,3 +1,5 @@
+package iEatWhat;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import iEatWhatEvents.Event;
 import iEatWhatEvents.EventHandler;
@@ -32,7 +34,7 @@ public class API {
                     ctx.render("{\"message\": \"No Body\"}");
                 } else {
                     Event evt = new Event(f.get("type"), f.get("payload"));
-                    String response = this.om.writeValueAsString(EventHandler.dispatchEvent(evt));
+                    String response = this.om.writeValueAsString(EventHandler.dispatchRESTEvent(evt));
                     ctx.render(response);
                 }
             });

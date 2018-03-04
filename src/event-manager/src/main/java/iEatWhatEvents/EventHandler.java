@@ -1,7 +1,12 @@
 package iEatWhatEvents;
 
 import Managers.FakeManager;
+import Workers.FoodData;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 import static Managers.FoodSearchManager.SearchEvent;
 import static Managers.UserManager.UserEvent;
@@ -12,21 +17,37 @@ public class EventHandler {
 
     }
 
+    public static Response dispatchInternalEvent(Event event) {
+        System.out.println("\n\nEventType \n" + event.getType());
+        String domain = event.getType().split(":")[0];
+        switch (domain) {
+            case "UPDATE_COLLECTIONS":
+                try {
+                    FoodData.getNutrientListUSDA();
+                } catch (ParserConfigurationException | SAXException | IOException e) {
+                    e.printStackTrace();
+                    return Response.ErrorBuilder.build("Error with event", event.getType());
+                }
+            default:
+                return Response.ErrorBuilder.build("Could not match event of type ", event.getType());
+        }
+
+    }
+
     // Our iEatWhatEvents.Event.type should follow a EVENT:TYPE convention
-    public static Response dispatchEvent(Event event) throws Exception {
+    public static Response dispatchRESTEvent(Event event) throws Exception {
         System.out.println("\n\nEventType \n" + event.getType());
         String domain = event.getType().split(":")[0];
 
         switch(domain) {
+                // A demonstration of the event/manager/worker pattern used.
+            case "FAKE":
+                // Write the return value to a string for transport in the response object.
+
             case "SEARCH":
                 return SearchEvent(event);
             case "USER":
                 return UserEvent(event);
-            case "TEST":
-                // Write the return value to a string for transport in the response object.
-                return TestEvent(event);
-            case "PRIVATE":
-                break;
             default:
                 System.out.println("iEatWhatEvents.Event Not Recognized " + event.getType());
         }

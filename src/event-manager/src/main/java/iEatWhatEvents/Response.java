@@ -44,4 +44,23 @@ public class Response {
     public boolean isOk() {
         return ok;
     }
+
+    static public Response pack(String message, Object body, String eventType) {
+        return new Response(
+            true,
+            "User could not be created.",
+            body,
+            eventType
+        );
+    }
+    public static class ErrorBuilder {
+        static Response build(String message, String eventType){
+            return new Response(
+                false,
+                message,
+                "No Body",
+                eventType
+            );
+        }
+    }
 }

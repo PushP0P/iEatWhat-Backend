@@ -1,11 +1,8 @@
 package Workers;
 
 import DBManager.DBManager;
-import USDA.Description;
-import USDA.Nutrient;
-import USDA.Report;
+import USDA.*;
 
-import USDA.SearchItem;
 import Utilities.HTTPSRequest;
 import Utilities.URLBuilders;
 
@@ -17,7 +14,6 @@ import iEatWhatModels.SearchTermResult;
 import org.hibernate.Session;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
-import sun.misc.Regexp;
 
 import javax.persistence.NoResultException;
 import javax.xml.parsers.ParserConfigurationException;
@@ -30,6 +26,7 @@ public class FoodData {
     private static ObjectMapper om = new ObjectMapper();
     private static String USDAUrl = "https://api.nal.usda.gov/ndb";
     private static String apiKey = "JiiJJlr1FvAcye8lkFIJuy8dFjhZcP2x7PNBEcIQ";
+    private static Session session = DBManager.getSession();
 
     /**
      * searchFoodUSDA returns stored search results that match searchTerm or queries the USDA
@@ -42,9 +39,12 @@ public class FoodData {
      * @throws IOException
      */
     public static SearchTermResult searchFoodUSDA(String searchTerms) throws ParserConfigurationException, SAXException, IOException {
+
+        // todo Invalidating the stores
+
         List<SearchItem> results = Collections.emptyList();
         NodeList items;
-        Session session = DBManager.getSession();
+
 
         try {
             SearchTermResult.checkForCached(session, searchTerms);
@@ -82,17 +82,19 @@ public class FoodData {
      * @throws SAXException
      */
     public static Report getFullReportUSDA(String ndbno) throws IOException, ParserConfigurationException, SAXException {
-        Session session = DBManager.getSession();
         String type = "V2/reports";
         Map<String, String> params = new HashMap<>();
+
         params.put("api_key", apiKey);
         params.put("description_ndbno", ndbno);
         params.put("type", "f");
         params.put("format", "xml");
         URL reportURL = new URL(URLBuilders.buildBaseUSDAURL(USDAUrl, type) + URLBuilders.getParamsString(params));
+
         Document report = HTTPSRequest.getXMLRequest(reportURL);
         report.getDocumentElement().normalize();
         List<Node> items = XMLUtil.asList(report.getDocumentElement().getElementsByTagName("food"));
+
         items.forEach(item -> {
             Description.addOrUpdate(session, ((Element) item).getElementsByTagName("desc").item(0));
             List<Node> nutrientNodes = XMLUtil.asList(((Element) item).getElementsByTagName("nutrients"));
@@ -100,7 +102,9 @@ public class FoodData {
             try {
                 nutrients.add(Nutrient.retrieveById(session, ndbno));
             } catch (NoResultException n) {
-                addNutrientsFromList(session, nutrientNodes);
+                for (Node nutrient: nutrientNodes) {
+                    Nutrient.updateWithInstance(session, nutrientFromNode(session, nutrient));
+                }
             }
 
             System.out.println("Node Name \n" + report.getDocumentElement().getNodeName());
@@ -117,7 +121,7 @@ public class FoodData {
      * @throws ParserConfigurationException
      * @throws SAXException
      */
-    public static Document getNutrientListUSDA() throws IOException, ParserConfigurationException, SAXException {
+    public static List getNutrientListUSDA() throws IOException, ParserConfigurationException, SAXException {
         String type = "list";
         Map<String, String> params = new HashMap<>();
         params.put("api_key", apiKey);
@@ -126,7 +130,12 @@ public class FoodData {
         params.put("format", "xml");
         Document list = HTTPSRequest.getXMLRequest(new URL(URLBuilders.buildBaseUSDAURL(USDAUrl, type) + URLBuilders.getParamsString(params)));
         list.getDocumentElement().normalize();
-        return list;
+        List<Node> nutrientNodes = XMLUtil.asList(list.getElementsByTagName("item"));
+        Set<Nutrient> nutrients = Collections.emptySet();
+        for (Node nutrient: nutrientNodes) {
+            nutrients.add(nutrientFromNode(session, nutrient));
+        }
+        return Nutrient.getAll(session);
     }
 
     /**
@@ -139,7 +148,6 @@ public class FoodData {
      * @throws IOException
      */
     public static Description retrieveDescription(String ndbno) throws ParserConfigurationException, SAXException, IOException {
-        Session session = DBManager.getSession();
         Description description = Description.findDescription(session, ndbno);
         System.out.println("descNode \n" + om.writeValueAsString(description));
         if (description != null) {
@@ -156,40 +164,18 @@ public class FoodData {
      * @throws SAXException
      * @throws IOException
      */
-    public static void updateNutrientList() throws ParserConfigurationException, SAXException, IOException {
-        Document results = getNutrientListUSDA();
-        List<Node> nutrients = XMLUtil.asList(results.getDocumentElement().getElementsByTagName("item"));
 
-        Session session = DBManager.getSession();
-        addNutrientsFromList(session, nutrients);
-    }
+    public static List retrieveNutrientList(String nutrient_id) throws ParserConfigurationException, SAXException, IOException {
 
-    public static void addNutrientsFromList(Session session, List<Node> nutrients) {
-        for (Node nutrient : nutrients) {
-            String nutrient_id = ((Element) nutrient).getElementsByTagName("nutrient_id").item(0).getTextContent();
-            String derivation = ((Element) nutrient).getElementsByTagName("derivation").item(0).getTextContent();
-            String group = ((Element) nutrient).getElementsByTagName("group").item(0).getTextContent();
-            String measures = ((Element) nutrient).getElementsByTagName("measures").item(0).getTextContent();
-            String name = ((Element) nutrient).getElementsByTagName("name").item(0).getTextContent();
-            String se = ((Element) nutrient).getElementsByTagName("se").item(0).getTextContent();
-            String sourcecode = ((Element) nutrient).getElementsByTagName("sourcecode").item(0).getTextContent();
-            String unit = ((Element) nutrient).getElementsByTagName("unit").item(0).getTextContent();
-            int dp = Integer.parseInt(((Element) nutrient).getElementsByTagName("dp").item(0).getTextContent();
-            float value = Float.parseFloat(((Element) nutrient).getElementsByTagName("value").item(0).getTextContent());
-            Nutrient.addOrUpdate(session, nutrient_id, derivation, dp,  group,  measures,  name,  se,  sourcecode, unit,  value);
+        if (NutrientList.size() > 0 && NutrientList) {
+            return Nutrient.getAll(session);
+        } else {
+          return getNutrientListUSDA();
         }
-
-    }
-
-    public static void retrieveNutrient(String nutrient_id) throws ParserConfigurationException, SAXException, IOException {
-        // Todo
-        updateNutrientList();
     }
 
     public static FoodItem FoodItemFactory(String ndbno) throws ParserConfigurationException, SAXException, IOException {
-        Session session = DBManager.getSession();
         Report report = getFullReportUSDA(ndbno);
-
         try {
             return FoodItem.retrieveByNdbno(session, ndbno);
 
@@ -266,14 +252,28 @@ public class FoodData {
             }
         }
     }
-    static String extractUPC(String productName){
+
+    static String extractUPC(String productName) {
         return productName.split("/(UPC:)+w/")[1];
     }
-
-    static String[] csvToArray (String productName){
+    static String[] csvToArray (String productName) {
         return productName.split(",");
     }
-    static String[] extractCapCased (String productName){
+
+    static String[] extractCapCased (String productName) {
         return productName.split("/([A-Z]){2}/g");
+    }
+
+    private static Nutrient nutrientFromNode(Session session, Node nutrientNode) {
+        String nutrient_id = ((Element) nutrientNode).getElementsByTagName("nutrient_id").item(0).getTextContent();
+        String derivation = ((Element) nutrientNode).getElementsByTagName("derivation").item(0).getTextContent();
+        String group = ((Element) nutrientNode).getElementsByTagName("group").item(0).getTextContent();
+        String name = ((Element) nutrientNode).getElementsByTagName("name").item(0).getTextContent();
+        String se = ((Element) nutrientNode).getElementsByTagName("se").item(0).getTextContent();
+        String sourcecode = ((Element) nutrientNode).getElementsByTagName("sourcecode").item(0).getTextContent();
+        String unit = ((Element) nutrientNode).getElementsByTagName("unit").item(0).getTextContent();
+        int dp = Integer.parseInt(((Element) nutrientNode).getElementsByTagName("dp").item(0).getTextContent());
+        float value = Float.parseFloat(((Element) nutrientNode).getElementsByTagName("value").item(0).getTextContent());
+        return new Nutrient(nutrient_id, derivation, dp, group, name, se,sourcecode, unit, value);
     }
 }

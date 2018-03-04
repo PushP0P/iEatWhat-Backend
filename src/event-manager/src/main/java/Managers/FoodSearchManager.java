@@ -12,28 +12,28 @@ public class FoodSearchManager {
     public static Response SearchEvent(Event evt) throws Exception {
         String type = evt.getType().split(":")[1];
         switch (type) {
+            case"TERMS":
+                return Response.pack(
+                    "Search results for " + evt.getPayload(),
+                    FoodSearch.getByFoodTerm(evt.getPayload()),
+                    evt.getType());
             case"REPORT":
-                String result = om.writeValueAsString(FoodSearch.getReport(evt.getPayload()));
-                return  new Response(
-                        true,
-                        "Report Found",
-                        result,
-                        evt.getType()
+                return Response.pack(
+                    "Report found for" + evt.getPayload(),
+                    FoodSearch.getReport(evt.getPayload()),
+                    evt.getType()
                 );
             case"DESCRIPTION":
-                String description = om.writeValueAsString(FoodSearch.getDescription(evt.getPayload()));
-                return  new Response(
-                        true,
-                        "Description Found",
-                        description,
+                return Response.pack(
+                        "Description found for " + evt.getPayload(),
+                        FoodSearch.getDescription(evt.getPayload()),
                         evt.getType()
                 );
-            case"NUTRIENT":
-                FoodData.retrieveNutrient(evt.getPayload());
-                return  new Response(
-                        true,
-                        "Description Found",
-                        "Test Nutrient Search",
+            case"NUTRIENT_LIST":
+                FoodData.retrieveNutrientList(evt.getPayload());
+                return Response.pack(
+                        "Nutrient found for " + evt.getPayload(),
+                        FoodSearch.getNutrientList(),
                         evt.getType()
                 );
         }

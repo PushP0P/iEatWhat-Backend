@@ -1,3 +1,5 @@
+package iEatWhat;
+
 import ratpack.groovy.template.TextTemplateModule;
 import ratpack.guice.Guice;
 import ratpack.handling.Chain;
