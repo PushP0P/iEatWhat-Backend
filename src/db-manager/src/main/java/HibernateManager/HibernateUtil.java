@@ -5,12 +5,9 @@ import java.util.Map;
 
 import Models.*;
 
-import USDA.Description;
-import USDA.Measures;
-import USDA.Nutrient;
-import USDA.Report;
+import USDA.*;
 
-import iEatWhatModels.IEW_User;
+import iEatWhatModels.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -18,12 +15,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Environment;
 
-
-/**
- * @author imssbora
- */
 public class HibernateUtil {
-
     private static StandardServiceRegistry registry;
     private static SessionFactory sessionFactory;
 
@@ -37,31 +29,37 @@ public class HibernateUtil {
                 settings.put(Environment.DRIVER, "org.postgresql.Driver");
                 settings.put(Environment.URL, "jdbc:postgresql://127.0.0.1:5432/testdb");
                 settings.put(Environment.JPA_JDBC_URL, "jdbc:postgresql://127.0.0.1:5432/testdb");
-//                settings.put(Environment.USER, "root");
+//                settings.put(Environment.USER, "postgres");
 //                settings.put(Environment.PASS, "admin");
                 settings.put(Environment.HBM2DDL_AUTO, "create");
                 settings.put(Environment.SHOW_SQL, true);
 
                 // HikariCP settings
-
-                // Maximum waiting time for a connection from the pool
                 settings.put("hibernate.hikari.connectionTimeout", "20000");
-                // Minimum number of ideal connections in the pool
                 settings.put("hibernate.hikari.minimumIdle", "10");
-                // Maximum number of actual connection in the pool
                 settings.put("hibernate.hikari.maximumPoolSize", "20");
-                // Maximum time that a connection is allowed to sit ideal in the pool
                 settings.put("hibernate.hikari.idleTimeout", "300000");
 
                 registryBuilder.applySettings(settings);
                 registry = registryBuilder.build();
                 MetadataSources sources = new MetadataSources(registry)
+                        // iEatWhatModels
+                        .addAnnotatedClass(Category.class)
                         .addAnnotatedClass(IEW_User.class)
+                        .addAnnotatedClass(FoodItem.class)
+                        .addAnnotatedClass(Review.class)
+                        .addAnnotatedClass(SearchTermResult.class)
+                        // Models
                         .addAnnotatedClass(Model.class)
-                        .addAnnotatedClass(Report.class)
-                        .addAnnotatedClass(Measures.class)
+                        .addAnnotatedClass(NutrientList.class)
+                        .addAnnotatedClass(Nutrient.class)
+                        // USDA
                         .addAnnotatedClass(Description.class)
-                        .addAnnotatedClass(Nutrient.class);
+                        .addAnnotatedClass(Measures.class)
+                        .addAnnotatedClass(Nutrient.class)
+                        .addAnnotatedClass(NutrientList.class)
+                        .addAnnotatedClass(SearchItem.class)
+                        .addAnnotatedClass(Report.class);
                 Metadata metadata = sources.getMetadataBuilder().build();
                 sessionFactory = metadata.getSessionFactoryBuilder().build();
             } catch (Exception e) {

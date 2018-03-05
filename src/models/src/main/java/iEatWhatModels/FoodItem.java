@@ -12,11 +12,11 @@ import java.util.Set;
 @Entity
 public class FoodItem {
     @Id
-    private String foodItem_ndbno;
+    private String food_item_ndbno;
     private String name;
     private String manu;
     private String upc;
-    @ManyToMany(mappedBy = "category_tag")
+    @ManyToMany(mappedBy = "tag")
     private Set<Category> categories;
     @OneToOne(mappedBy = "description_ndbno")
     private Description description;
@@ -30,8 +30,8 @@ public class FoodItem {
 
     }
 
-    FoodItem(String foodItem_ndbno, String name, String manu, String upc, Set<Category> categories, Description description, String blurb) {
-        this.foodItem_ndbno = foodItem_ndbno;
+    FoodItem(String food_item_ndbno, String name, String manu, String upc, Set<Category> categories, Description description, String blurb) {
+        this.food_item_ndbno = food_item_ndbno;
         this.name = name;
         this.manu = manu;
         this.upc = upc;
@@ -42,11 +42,11 @@ public class FoodItem {
     }
 
     public String getNdbno() {
-        return foodItem_ndbno;
+        return food_item_ndbno;
     }
 
     public void setNdbno(String ndbno) {
-        this.foodItem_ndbno = ndbno;
+        this.food_item_ndbno = ndbno;
     }
 
     public String getManu() {

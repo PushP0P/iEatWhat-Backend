@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 public class Description {
     @Id
+    @OneToOne(mappedBy = "food_item_ndbno")
     public String description_ndbno;
     //    @OneToOne
 //    @JoinColumn(name = "report_id")

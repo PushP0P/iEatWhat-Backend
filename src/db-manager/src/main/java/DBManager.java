@@ -1,19 +1,15 @@
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.service.Service;
 import org.hibernate.service.ServiceRegistry;
 import ratpack.handling.Context;
 import Models.*;
 import javax.sql.DataSource;
 import java.sql.*;
-import java.io.*;
 
 
 public class DBManager implements ratpack.handling.Handler {
-
     private Context ctx;
     private Connection c;
     private String[] tables;

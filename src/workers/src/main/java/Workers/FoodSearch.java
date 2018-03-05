@@ -1,20 +1,14 @@
 package Workers;
 
-import DBManager.DBManager;
-
 import USDA.Description;
 
-import USDA.Nutrient;
 import USDA.Report;
-import iEatWhatModels.SearchTermResult;
-import org.hibernate.Session;
 
 import org.xml.sax.SAXException;
 
-import javax.persistence.NoResultException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.Set;
+import java.util.List;
 
 public class FoodSearch {
 
@@ -26,19 +20,19 @@ public class FoodSearch {
         return FoodData.retrieveDescription(ndbno);
     }
 
-    public static SearchTermResult getByFoodTerm(String searchTerms) throws IOException, SAXException, ParserConfigurationException {
-        Session session = DBManager.getSession();
-        try {
-            return SearchTermResult.checkForCached(session, searchTerms);
-
-        } catch (NoResultException n) {
+    public static List getByFoodTerm(String searchTerms) throws IOException, SAXException, ParserConfigurationException {
+        System.out.println("hit \n" + searchTerms);
+//        Session session = DBManager.getSession();
+//        try {
+//            return SearchTermResult.retrieveByTerm(session, searchTerms);
+//
+//        } catch (NoResultException n) {
             return FoodData.searchFoodUSDA(searchTerms);
-        }
+//        }
     }
 
-    public static Set<Nutrient> getNutrientList() throws ParserConfigurationException, SAXException, IOException {
-        return (Set<Nutrient>) FoodData.getNutrientListUSDA();
-
+    public static List getNutrientList() throws ParserConfigurationException, SAXException, IOException {
+        return (List) FoodData.getNutrientListUSDA();
     }
 }
 

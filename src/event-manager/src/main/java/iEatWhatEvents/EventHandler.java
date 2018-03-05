@@ -14,31 +14,23 @@ import static Managers.UserManager.UserEvent;
 public class EventHandler {
     private static ObjectMapper om = new ObjectMapper();
     static void main(String... args) {
+}
 
-    }
-
-    public static Response dispatchInternalEvent(Event event) {
-        System.out.println("\n\nEventType \n" + event.getType());
-        String domain = event.getType().split(":")[0];
-        switch (domain) {
-            case "UPDATE_COLLECTIONS":
-                try {
-                    FoodData.getNutrientListUSDA();
-                } catch (ParserConfigurationException | SAXException | IOException e) {
-                    e.printStackTrace();
-                    return Response.ErrorBuilder.build("Error with event", event.getType());
-                }
-            default:
-                return Response.ErrorBuilder.build("Could not match event of type ", event.getType());
-        }
-
-    }
+//    public static Response dispatchInternalEvent(Event event) throws ParserConfigurationException, SAXException, IOException {
+//        String domain = event.getType().split(":")[0];
+//        switch (domain) {
+//            case "UPDATE_COLLECTIONS":
+//                FoodData.getNutrientListUSDA();
+//                return Response.pack("Done with event","", event.getType());
+//            default:
+//                return Response.ErrorBuilder.build("Could not match event of type ", event.getType());
+//        }
+//    }
 
     // Our iEatWhatEvents.Event.type should follow a EVENT:TYPE convention
     public static Response dispatchRESTEvent(Event event) throws Exception {
         System.out.println("\n\nEventType \n" + event.getType());
         String domain = event.getType().split(":")[0];
-
         switch(domain) {
                 // A demonstration of the event/manager/worker pattern used.
             case "FAKE":

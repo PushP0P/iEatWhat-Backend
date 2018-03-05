@@ -39,6 +39,78 @@ public class Nutrient {
         this.value = value;
     }
 
+    public String getNutrient_id() {
+        return nutrient_id;
+    }
+
+    public void setNutrient_id(String nutrient_id) {
+        this.nutrient_id = nutrient_id;
+    }
+
+    public String getDerivation() {
+        return derivation;
+    }
+
+    public void setDerivation(String derivation) {
+        this.derivation = derivation;
+    }
+
+    public int getDp() {
+        return dp;
+    }
+
+    public void setDp(int dp) {
+        this.dp = dp;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSe() {
+        return se;
+    }
+
+    public void setSe(String se) {
+        this.se = se;
+    }
+
+    public String getSourcecode() {
+        return sourcecode;
+    }
+
+    public void setSourcecode(String sourcecode) {
+        this.sourcecode = sourcecode;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public float getValue() {
+        return value;
+    }
+
+    public void setValue(float value) {
+        this.value = value;
+    }
+
     public static Nutrient addOrUpdate(Session session, String nutrient_id, String derivation,
                                        int dp, String group, String name,
                                        String se, String sourcecode,
@@ -56,7 +128,7 @@ public class Nutrient {
     }
 
     public static List getAll(Session session) throws NoResultException {
-        Query query = session.createQuery("from Nutrient");
+        Query query = session.createQuery("select n from Nutrient n");
         return query.getResultList();
     }
 

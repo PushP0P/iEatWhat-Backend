@@ -5,36 +5,29 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
 
 @Entity
 public class SearchTermResult {
-    @Id @GeneratedValue
-    public int Id;
-    @Column
-    public String term;
-    @ManyToMany(mappedBy = "description_ndbno")
-    Set<SearchItem> SearchItems;
+    @Id
+    private String term;
+    @ManyToMany(mappedBy = "search_item_ndbno")
+    Set<SearchItem> searchItems;
     @Temporal(TemporalType.DATE)
     public Date updatedOn;
 
+    SearchTermResult() {}
 
-    public SearchTermResult() {}
-
-
-    public SearchTermResult(String term, Set<SearchItem> SearchItems) {
+    SearchTermResult(String term, Set<SearchItem> SearchItems) {
         this.term = term;
-        this.SearchItems = SearchItems;
+        this.searchItems = SearchItems;
         this.updatedOn = new Date(System.currentTimeMillis());
     }
 
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
-    }
 
     public String getTerm() {
         return term;
@@ -45,11 +38,11 @@ public class SearchTermResult {
     }
 
     public Set<SearchItem> getSearchItems() {
-        return SearchItems;
+        return searchItems;
     }
 
-    public void setSearchItems(Set<SearchItem> SearchItems) {
-        this.SearchItems = SearchItems;
+    public void setSearchItems(Set<SearchItem> searchItems) {
+        this.searchItems = searchItems;
     }
 
     public Date getUpdatedOn() {
@@ -70,9 +63,10 @@ public class SearchTermResult {
         return result;
     }
 
-    public static SearchTermResult checkForCached(Session session, String searchTerm) throws NoResultException {
-        Query query = session.createQuery("from SearchResult where searchTerm = :searchTerm");
-        query.setParameter(":searchTerm", searchTerm);
-        return (SearchTermResult) query.getResultList().get(0);
+    public static SearchTermResult retrieveByTerm(Session session, String searchTerm) throws NoResultException {
+//        Query query = session.createQuery("select s from SearchTermResult s where term = :term");
+//        query.setParameter("term", searchTerm);
+//        return (SearchTermResult) query.getResultList().get(0);
+        return session.find(SearchTermResult.class, searchTerm);
     }
 }

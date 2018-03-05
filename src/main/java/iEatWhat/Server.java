@@ -12,27 +12,32 @@ import java.util.Map;
 import static ratpack.groovy.Groovy.groovyTemplate;
 
 public class Server {
-    public void startServer(Map<String, Handler> getHandlers, Map<String, Handler> postHandlers) throws Exception {
-        RatpackServer.start(server -> server
-            .serverConfig(config -> config
-                    .onError(System.out::println)
-                    .baseDir(BaseDir.find())
-                    .env())
-            .registry(Guice.registry(b -> {
-                b.module(TextTemplateModule.class, conf -> conf.setStaticallyCompile(true));
-            }))
-            .handlers(chain -> {
-                chain.prefix("get", api -> {
-                    headers(getHandlers, api);
-                });
-                chain.prefix("post", api -> {
-                    headers(postHandlers, api);
-                });
-                chain.get("", ctx -> ctx.render(groovyTemplate( "index.html")));
-                chain.get(":view", ctx -> ctx.render(groovyTemplate( "index.html")));
-                chain.files(f -> f.dir("public"));
-            })
-        );
+    public void startServer(Map<String, Handler> getHandlers, Map<String, Handler> postHandlers) {
+
+        try {
+            RatpackServer.start(server -> server
+                .serverConfig(config -> config
+                        .onError(System.out::println)
+                        .baseDir(BaseDir.find())
+                        .env())
+                .registry(Guice.registry(b -> {
+                    b.module(TextTemplateModule.class, conf -> conf.setStaticallyCompile(true));
+                }))
+                .handlers(chain -> {
+                    chain.prefix("get", api -> {
+                        headers(getHandlers, api);
+                    });
+                    chain.prefix("post", api -> {
+                        headers(postHandlers, api);
+                    });
+                    chain.get("", ctx -> ctx.render(groovyTemplate( "index.html")));
+                    chain.get(":view", ctx -> ctx.render(groovyTemplate( "index.html")));
+                    chain.files(f -> f.dir("public"));
+                })
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void headers(Map<String, Handler> getHandlers, Chain api) {

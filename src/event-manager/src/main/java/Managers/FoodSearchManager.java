@@ -30,7 +30,7 @@ public class FoodSearchManager {
                         evt.getType()
                 );
             case"NUTRIENT_LIST":
-                FoodData.retrieveNutrientList(evt.getPayload());
+                FoodData.retrieveNutrientList();
                 return Response.pack(
                         "Nutrient found for " + evt.getPayload(),
                         FoodSearch.getNutrientList(),

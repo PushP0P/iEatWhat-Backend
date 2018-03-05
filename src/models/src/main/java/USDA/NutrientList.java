@@ -3,17 +3,16 @@ package USDA;
 import org.hibernate.Session;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class NutrientList {
     @Id @GeneratedValue
-    int id;
-    int total;
-    int sr;
+    public int id;
+    public int total;
+    public String sr;
     @Embedded
-    Set<Nutrient> nutrients;
+    public Set<Nutrient> nutrients;
     @Temporal(TemporalType.TIMESTAMP)
     public Date updatedOn;
 
@@ -21,7 +20,7 @@ public class NutrientList {
 
     }
 
-    public NutrientList(int total, int sr, Set<Nutrient> nutrients) {
+    public NutrientList(int total, String sr, Set<Nutrient> nutrients) {
         this.total = total;
         this.sr = sr;
         this.nutrients = nutrients;
@@ -52,11 +51,11 @@ public class NutrientList {
         this.total = total;
     }
 
-    public int getSr() {
+    public String getSr() {
         return sr;
     }
 
-    public void setSr(int sr) {
+    public void setSr(String sr) {
         this.sr = sr;
     }
 
@@ -68,7 +67,11 @@ public class NutrientList {
         this.nutrients = nutrients;
     }
 
-    public int add(Session session, int total, int sr, Set<Nutrient> nutrients) {
+    static public long updatedLastInMili(NutrientList nutrientList) {
+        return nutrientList.getUpdatedOn().getTime();
+    }
+
+    static public int add(Session session, int total, String sr, Set<Nutrient> nutrients) {
         session.getTransaction().begin();
         NutrientList nutrientList = new NutrientList(total, sr, nutrients);
         int result = (int) session.save(nutrientList);
@@ -76,7 +79,22 @@ public class NutrientList {
         return result;
     }
 
-    public NutrientList getList() {
-
+    static public NutrientList getLatestList(Session session) throws NoResultException {
+        List result  = session.createQuery("select n from NutrientList n where n.updatedOn >= all( select nn from NutrientList nn where nn.getId = n.getId )").list();
+        NutrientList mostCurrent = null;
+        for (int i = 0; i < result.size(); i++) {
+            NutrientList nextList =  (NutrientList) result.iterator().next();
+            if(mostCurrent == null) {
+                mostCurrent = nextList;
+            } else if (mostCurrent.getUpdatedOn().before(nextList.getUpdatedOn())) {
+                mostCurrent = nextList;
+            }
+        }
+        return mostCurrent;
     }
 }
+
+//    @SuppressWarnings("unchecked")
+//    Map<String, Number> map = getMap();
+//for (String s : map.keySet());
+//        for (Number n : map.values());

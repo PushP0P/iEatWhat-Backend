@@ -4,31 +4,35 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
-import java.util.List;
+import javax.persistence.ManyToMany;
 
 public class SearchItem {
     @Id
-    String ndbo;
-    String name;
-    String group;
+    @ManyToMany
+    public String search_item_ndbno;
+    @Column
+    public String name;
+    @Column
+    public String group;
     
     public SearchItem() {
         
     }
     
-    public SearchItem(String ndbo, String name, String group) {
-        this.ndbo = ndbo;
+    public SearchItem(String search_item_ndbno, String name, String group) {
+        this.search_item_ndbno = search_item_ndbno;
         this.name = name;
         this.group = group;
     }
 
-    public String getNdbo() {
-        return ndbo;
+    public String getSearch_item_ndbno() {
+        return search_item_ndbno;
     }
 
-    public void setNdbo(String ndbo) {
-        this.ndbo = ndbo;
+    public void setSearch_item_ndbno(String search_item_ndbno) {
+        this.search_item_ndbno = search_item_ndbno;
     }
 
     public String getName() {
@@ -56,16 +60,10 @@ public class SearchItem {
         return  result;
     }
 
-    public static List<SearchItem> findByFoodItemId(Session session, String food_item_id) {
-        Query query = session.createQuery("from ShortReport where food_item_id = :food_item_id");
-        query.setParameter("food_item_id", food_item_id);
-        return query.getResultList();
-    }
-    
     public static int destroy(Session session, String ndbo) {
         Transaction transaction = session.getTransaction();
         transaction.begin();
-        Query query = session.createQuery("delete ShortReport where shortReport_id = :shortReport_id");
+        Query query = session.createQuery("delete SearchItem where search_item_ndbono= :search_item_ndbno");
         query.setParameter("shortReport_id", ndbo);
         int result = query.executeUpdate();
         transaction.commit();
