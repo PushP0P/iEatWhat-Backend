@@ -7,20 +7,19 @@ import Utilities.HTTPSRequest;
 import Utilities.URLBuilders;
 
 import Utilities.XMLUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import iEatWhatModels.FoodItem;
-import iEatWhatModels.SearchTermResult;
 import org.hibernate.Session;
 import org.w3c.dom.*;
+import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import javax.persistence.NoResultException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
@@ -50,25 +49,25 @@ public class FoodData {
 //        try {
 //            SearchTermResult.retrieveByTerm(session, searchTerms);
 //        } catch (NoResultException n) {
-            System.out.println("no term?");
-            String type = "search";
-            Map<String, String> params = new HashMap<>();
-            params.put("api_key", apiKey);
-            params.put("q", searchTerms);
-            params.put("format", "xml");
-            Document resultXML = HTTPSRequest
+        System.out.println("no term?");
+        String type = "search";
+        Map<String, String> params = new HashMap<>();
+        params.put("api_key", apiKey);
+        params.put("q", searchTerms);
+        params.put("format", "xml");
+        Document resultXML = HTTPSRequest
                 .getXMLRequest(new URL(URLBuilders.buildBaseUSDAURL(USDAUrl, type)
-                    + URLBuilders.getParamsString(params))
+                        + URLBuilders.getParamsString(params))
                 );
-            resultXML.getDocumentElement().normalize();
-            items = resultXML.getDocumentElement().getElementsByTagName("item");
-            List<Node> nodeList = XMLUtil.asList(items);
-            for (int i = 0; i < nodeList.size(); i++) {
-                String ndbno = nodeList.get(i).getChildNodes().item(0).getTextContent();
-                String name = nodeList.get(i).getChildNodes().item(1).getTextContent();
-                String group = nodeList.get(i).getChildNodes().item(2).getTextContent();
-                results.add(new SearchItem(ndbno, name, group));
-            }
+        resultXML.getDocumentElement().normalize();
+        items = resultXML.getDocumentElement().getElementsByTagName("item");
+        List<Node> nodeList = XMLUtil.asList(items);
+        for (int i = 0; i < nodeList.size(); i++) {
+            String ndbno = nodeList.get(i).getChildNodes().item(0).getTextContent();
+            String name = nodeList.get(i).getChildNodes().item(1).getTextContent();
+            String group = nodeList.get(i).getChildNodes().item(2).getTextContent();
+            results.add(new SearchItem(ndbno, name, group));
+        }
 //        }
 //        int id = SearchTermResult.add(session, searchTerms, results);
 //        return session.find(SearchTermResult.class, id);
@@ -86,6 +85,11 @@ public class FoodData {
      * @throws SAXException
      */
     public static Report getFullReportUSDA(String ndbno) throws IOException, ParserConfigurationException, SAXException {
+
+        //        Report cachedReport = Report.
+
+
+        // Declare vars for fetching a full USDA Report.
         String type = "V2/reports";
         Map<String, String> params = new HashMap<>();
         params.put("api_key", apiKey);
@@ -93,21 +97,52 @@ public class FoodData {
         params.put("type", "f");
         params.put("format", "xml");
 
-        URL reportURL = new URL(URLBuilders.buildBaseUSDAURL(USDAUrl, type) + URLBuilders.getParamsString(params));
+        // Generate endpoint
+        URL reportURL = new URL(
+            URLBuilders
+                    .buildBaseUSDAURL(
+                            USDAUrl, type
+                    ) + URLBuilders
+                    .getParamsString(
+                            params
+                    ));
 
-        Document report = HTTPSRequest.getXMLRequest(reportURL);
-        report.getDocumentElement().normalize();
-        List<Node> items = XMLUtil.asList(report.getDocumentElement().getElementsByTagName("food"));
+        // Fetch
+        Document report = HTTPSRequest
+                .getXMLRequest(reportURL);
+        report.getDocumentElement()
+                .normalize();
+
+
+        List<Node> items = XMLUtil.asList(report
+                .getDocumentElement()
+                .getElementsByTagName("food"));
 
         items.forEach(item -> {
-            Description.addOrUpdate(session, ((Element) item).getElementsByTagName("desc").item(0));
-            List<Node> nutrientNodes = XMLUtil.asList(((Element) item).getElementsByTagName("nutrients"));
+            Description
+                    .addOrUpdate(session, ((Element) item)
+                            .getElementsByTagName("desc")
+                            .item(0));
+            List<Node> nutrientNodes = XMLUtil
+                    .asList(((Element) item)
+                    .getElementsByTagName("nutrients"));
+
             Set<Nutrient> nutrients = Collections.emptySet();
+
+            // try conditional refactoring
             try {
                 nutrients.add(Nutrient.retrieveById(session, ndbno));
             } catch (NoResultException n) {
-                for (Node nutrient: nutrientNodes) {
-                    Nutrient.updateWithInstance(session, nutrientFromNode(nutrient));
+                for (Node nutrient : nutrientNodes) {
+                    if (nutrient != null) {
+                        try {
+                            nutrients.add(nodeToNutrient((Node) nutrients, "Betty"));
+                            Nutrient.updateWithInstance(session, ((Node) nutrients).getAttributes().getNamedItem("ndbno").toString(), nutrients);
+                        } catch (JsonProcessingException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
                 }
             }
 
@@ -119,30 +154,40 @@ public class FoodData {
 
     /**
      * getNutrientListUSDA will fetch the full nutrient list from the USDA API.
+     *
      * @return
      */
     public static NutrientList getNutrientListUSDA() throws IOException, ParserConfigurationException, SAXException {
-        String type = "list";
+
+        // Initialize Params for USDA
         Map<String, String> params = new HashMap<>();
+        String type = "list";
         params.put("api_key", apiKey);
         params.put("max", "300");
+        params.put("type", "f");
         params.put("lt", "n");
         params.put("format", "xml");
-//        try {
-            Document responseXML = HTTPSRequest.getXMLRequest(new URL(URLBuilders.buildBaseUSDAURL(USDAUrl, type) + URLBuilders.getParamsString(params)));
-            System.out.println("hit" + responseXML.toString());
-            responseXML.getDocumentElement().normalize();
-            List<Node> nutrientNodes = XMLUtil.asList(responseXML.getElementsByTagName("item"));
-            Set<Nutrient> nutrients = Collections.emptySet();
-            for (Node nutrient: nutrientNodes) {
-                nutrients.add(nutrientFromNode(nutrient));
+
+        // Fetch XML from USDA
+        Document responseXML = HTTPSRequest.getXMLRequest(new URL(URLBuilders.buildBaseUSDAURL(USDAUrl, type) + URLBuilders.getParamsString(params)));
+        responseXML.getDocumentElement().normalize();
+        List<Node> nutrientNodes = XMLUtil.asList(responseXML.getElementsByTagName("item"));
+        Set<Nutrient> nutrients = Collections.emptySet();
+
+        // Group the nutrients into a Collection.class
+        for (Node node : nutrientNodes) {
+            if(node != null) {
+                Nutrient nutrient = nodeToNutrient(node, "merp");
+                nutrients.add(nutrient);
             }
-            NutrientList.add(session, nutrients.size(), nutrientNodes.get(0).getAttributes().getNamedItem("sr").getNodeValue(), nutrients);
-            return NutrientList.getLatestList(session);
-//        } catch (IOException | ParserConfigurationException | SAXException e) {
-//            e.printStackTrace();
-//            return new NutrientList();
-//        }
+        }
+
+        Attributes attributes = (Attributes) responseXML.getDocumentElement().getAttributes();
+        int total = Integer.parseInt(attributes.getValue("total"));
+        String sr = attributes.getValue("sr");
+
+        NutrientList.add(session, total, sr, nutrients);
+        return NutrientList.getLatestList(session);
     }
 
     /**
@@ -171,20 +216,19 @@ public class FoodData {
      * @throws SAXException
      * @throws IOException
      */
-
-    public static NutrientList retrieveNutrientList() throws ParserConfigurationException, SAXException, IOException {
-        try {
-            return NutrientList.getLatestList(session);
-        } catch (NoResultException n) {
-            return getNutrientListUSDA();
+    public static NutrientList retrieveNutrientList() {
+        NutrientList nutrientList = NutrientList.getLatestList(session);
+        if (nutrientList != null) {
+            return nutrientList;
         }
+            return NutrientList.getLatestList(session);
     }
 
-    public static FoodItem FoodItemFactory(String ndbno) throws ParserConfigurationException, SAXException, IOException {
+    public static FoodItem FoodItemFactory(String ndbno) throws
+            ParserConfigurationException, SAXException, IOException {
         Report report = getFullReportUSDA(ndbno);
         try {
             return FoodItem.retrieveByNdbno(session, ndbno);
-
         } catch (NoResultException n) {
             FoodItem.Builder foodItemBuilder = new FoodItem.Builder();
             foodItemBuilder.withNdbno(ndbno);
@@ -256,27 +300,38 @@ public class FoodData {
         }
     }
 
-    static String extractUPC(String productName) {
+    private static String extractUPC(String productName) {
         return productName.split("/(UPC:)+w/")[1];
     }
-    static String[] csvToArray (String productName) {
+
+    private static String[] csvToArray(String productName) {
         return productName.split(",");
     }
 
-    static String[] extractCapCased (String productName) {
+    static String[] extractCapCased(String productName) {
         return productName.split("/([A-Z]){2}/g");
     }
 
-    private static Nutrient nutrientFromNode(Node nutrientNode) {
-        String nutrient_id = ((Element) nutrientNode).getElementsByTagName("nutrient_id").item(0).getTextContent();
-        String derivation = ((Element) nutrientNode).getElementsByTagName("derivation").item(0).getTextContent();
-        String group = ((Element) nutrientNode).getElementsByTagName("group").item(0).getTextContent();
-        String name = ((Element) nutrientNode).getElementsByTagName("name").item(0).getTextContent();
-        String se = ((Element) nutrientNode).getElementsByTagName("se").item(0).getTextContent();
-        String sourcecode = ((Element) nutrientNode).getElementsByTagName("sourcecode").item(0).getTextContent();
-        String unit = ((Element) nutrientNode).getElementsByTagName("unit").item(0).getTextContent();
-        int dp = Integer.parseInt(((Element) nutrientNode).getElementsByTagName("dp").item(0).getTextContent());
-        float value = Float.parseFloat(((Element) nutrientNode).getElementsByTagName("value").item(0).getTextContent());
-        return new Nutrient(nutrient_id, derivation, dp, group, name, se,sourcecode, unit, value);
+    private static Nutrient nodeToNutrient(Node nutNode, String... args) throws JsonProcessingException {
+            System.out.println("nutrient \n" + om.writeValueAsString(nutNode));
+        if (nutNode != null) {
+
+
+            System.out.println("nutrient \n" + om.writeValueAsString(nutNode));
+            // Set our nutrient node values to Nutrient.class
+            String nutrient_id = ((Element) nutNode).getElementsByTagName("nutrient_id").item(0).getTextContent();
+            String derivation = ((Element) nutNode).getElementsByTagName("derivation").item(0).getTextContent();
+            String group = ((Element) nutNode).getElementsByTagName("group").item(0).getTextContent();
+            String name = ((Element) nutNode).getElementsByTagName("name").item(0).getTextContent();
+            String se = ((Element) nutNode).getElementsByTagName("se").item(0).getTextContent();
+            String sourcecode = ((Element) nutNode).getElementsByTagName("sourcecode").item(0).getTextContent();
+            String unit = ((Element) nutNode).getElementsByTagName("unit").item(0).getTextContent();
+            int dp = Integer.parseInt(((Element) nutNode).getElementsByTagName("dp").item(0).getTextContent());
+            float value = Float.parseFloat(((Element) nutNode).getElementsByTagName("value").item(0).getTextContent());
+
+            //
+            return new Nutrient(nutrient_id, derivation, dp, group, name, se, sourcecode, unit, value);
+        }
+        return new Nutrient("Null", "Null", -1, "Null", "Null", "Null","Null","Null", -1);
     }
 }

@@ -1,0 +1,7 @@
+2018-03-06 07:31:01.474 PST [26450] LOG:  listening on IPv6 address "::1", port 5432
+2018-03-06 07:31:01.474 PST [26450] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2018-03-06 07:31:01.475 PST [26450] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2018-03-06 07:31:01.495 PST [26451] LOG:  database system was shut down at 2018-03-06 06:57:46 PST
+2018-03-06 07:31:01.501 PST [26450] LOG:  database system is ready to accept connections
+2018-03-06 07:54:08.333 PST [26697] FATAL:  database "testdb" does not exist
+2018-03-06 07:55:39.002 PST [26757] FATAL:  database "testdb" does not exist

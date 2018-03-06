@@ -16,16 +16,16 @@ public class EventHandler {
     static void main(String... args) {
 }
 
-//    public static Response dispatchInternalEvent(Event event) throws ParserConfigurationException, SAXException, IOException {
-//        String domain = event.getType().split(":")[0];
-//        switch (domain) {
-//            case "UPDATE_COLLECTIONS":
-//                FoodData.getNutrientListUSDA();
-//                return Response.pack("Done with event","", event.getType());
-//            default:
-//                return Response.ErrorBuilder.build("Could not match event of type ", event.getType());
-//        }
-//    }
+    public static Response dispatchInternalEvent(Event event) throws ParserConfigurationException, SAXException, IOException {
+        String domain = event.getType().split(":")[0];
+        switch (domain) {
+            case "UPDATE_COLLECTIONS":
+                FoodData.getNutrientListUSDA();
+                return Response.pack("Done with event","", event.getType());
+            default:
+                return Response.ErrorBuilder.build("Could not match event of type ", event.getType());
+        }
+    }
 
     // Our iEatWhatEvents.Event.type should follow a EVENT:TYPE convention
     public static Response dispatchRESTEvent(Event event) throws Exception {
@@ -35,7 +35,6 @@ public class EventHandler {
                 // A demonstration of the event/manager/worker pattern used.
             case "FAKE":
                 // Write the return value to a string for transport in the response object.
-
             case "SEARCH":
                 return SearchEvent(event);
             case "USER":
@@ -54,23 +53,21 @@ public class EventHandler {
      * @return iEatWhatEvents.Response
      * @throws Exception
      */
-    private static Response TestEvent(Event evt) throws Exception {
+    private static Response TestEvent(Event evt) {
         // Instantiate your manager to consume the Events payload.
         FakeManager fm = new FakeManager();
-
         String managerDone = fm.doSomething(evt.getPayload());
 
         // Managers that return a response should use the iEatWhatEvents.Response.class
         // if manager is not suppose to respond then manually send a iEatWhatEvents.Response.ok == true
         Response response = new Response(
-                true,
-                "Manager is done.",
-                managerDone,
-                evt.getType()
+            true,
+            "Manager is done.",
+            managerDone,
+            evt.getType()
         );
 
         return response;
         // TODO Wire up Managers
     }
-
 }

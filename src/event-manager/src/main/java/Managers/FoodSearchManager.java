@@ -38,10 +38,10 @@ public class FoodSearchManager {
                 );
         }
         return new Response(
-                false,
-                "Search Type Not Found: " + evt.getType(),
-                "No Body",
-                evt.getType()
+            false,
+            "Search Type Not Found: " + evt.getType(),
+            "No Body",
+            evt.getType()
         );
     }
 }

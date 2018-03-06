@@ -14,22 +14,22 @@ public class Main {
 
     public static void main(String... args) {
         ObjectMapper om = new ObjectMapper();
-//        try {
+        try {
             initializeAPI();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        Response result = null;
-//        try {
-//            result = EventHandler.dispatchInternalEvent(new Event("UPDATE_COLLECTIONS", ""));
-//        } catch (ParserConfigurationException | SAXException | IOException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            System.out.println(om.writeValueAsString(result));
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Response result = null;
+        try {
+            result = EventHandler.dispatchInternalEvent(new Event("UPDATE_COLLECTIONS", ""));
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            System.out.println(om.writeValueAsString(result));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void initializeAPI() {

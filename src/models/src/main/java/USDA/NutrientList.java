@@ -12,9 +12,9 @@ public class NutrientList {
     public int total;
     public String sr;
     @Embedded
-    public Set<Nutrient> nutrients;
+    private Set<Nutrient> nutrients;
     @Temporal(TemporalType.TIMESTAMP)
-    public Date updatedOn;
+    public Date updated_on;
 
     public NutrientList() {
 
@@ -27,12 +27,12 @@ public class NutrientList {
 
     }
 
-    public Date getUpdatedOn() {
-        return updatedOn;
+    public Date getUpdated_on() {
+        return updated_on;
     }
 
-    public void setUpdatedOn(Date updatedOn) {
-        this.updatedOn = updatedOn;
+    public void setUpdated_on(Date updated_on) {
+        this.updated_on = updated_on;
     }
 
     public int getId() {
@@ -68,7 +68,7 @@ public class NutrientList {
     }
 
     static public long updatedLastInMili(NutrientList nutrientList) {
-        return nutrientList.getUpdatedOn().getTime();
+        return nutrientList.getUpdated_on().getTime();
     }
 
     static public int add(Session session, int total, String sr, Set<Nutrient> nutrients) {
@@ -86,7 +86,7 @@ public class NutrientList {
             NutrientList nextList =  (NutrientList) result.iterator().next();
             if(mostCurrent == null) {
                 mostCurrent = nextList;
-            } else if (mostCurrent.getUpdatedOn().before(nextList.getUpdatedOn())) {
+            } else if (mostCurrent.getUpdated_on().before(nextList.getUpdated_on())) {
                 mostCurrent = nextList;
             }
         }

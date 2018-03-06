@@ -4,11 +4,13 @@ import USDA.Description;
 
 import USDA.Report;
 
+import USDA.SearchItem;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 public class FoodSearch {
 
@@ -20,8 +22,9 @@ public class FoodSearch {
         return FoodData.retrieveDescription(ndbno);
     }
 
-    public static List getByFoodTerm(String searchTerms) throws IOException, SAXException, ParserConfigurationException {
+    public static Set<SearchItem> getByFoodTerm(String searchTerms) throws IOException, SAXException, ParserConfigurationException {
         System.out.println("hit \n" + searchTerms);
+
 //        Session session = DBManager.getSession();
 //        try {
 //            return SearchTermResult.retrieveByTerm(session, searchTerms);

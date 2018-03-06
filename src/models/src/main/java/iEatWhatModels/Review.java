@@ -75,8 +75,8 @@ public class Review {
         return  result;
     }
 
-    public static List<Review> findByFoodItemId(Session session, String food_item_id) {
-        Query query = session.createQuery("from Review where food_item_id = :food_item_id");
+    public static List findByFoodItemId(Session session, String food_item_id) {
+        Query query = session.createQuery("select r from Review r where food_item_id = :food_item_id");
         query.setParameter("food_item_id", food_item_id);
         return query.getResultList();
     }
